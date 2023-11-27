@@ -2,7 +2,7 @@
 
 #### 介绍
 
-IM-LIVE 是继承Spring Cloud Alibaba 、Spring Authorization Server、Netty和Higress云原生网关在IM即时通讯和LIVE直播推流功能的平台软件 
+IM-LIVE 是集成 Spring Cloud Alibaba 、Spring Authorization Server、Netty和Higress云原生网关在IM即时通讯和LIVE直播推流功能的平台软件 
 #### 软件架构
 软件架构说明
 
