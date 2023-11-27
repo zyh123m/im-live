@@ -11,6 +11,7 @@
     <modules>
         <module>im-live-user</module>
         <module>im-live-msg</module>
+        <module>im-live-common</module>
     </modules>
 
     <properties>
@@ -35,21 +36,7 @@
     </properties>
 
     <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <!-- 环境标识，需要与配置文件的名称相对应 -->
-                <profiles.active>dev</profiles.active>
-                <nacos.server>192.168.101.121:8848</nacos.server>
-                <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
-                <namespace>c109e596-547f-4388-bf5d-998a1f4d87ff</namespace>
-                <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
-            </properties>
-            <activation>
-                <!-- 默认环境 -->
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
+
 
         <profile>
             <id>KubeSphere</id>
@@ -61,8 +48,14 @@
                 <namespace>78c428bd-5817-4262-b9ab-eec29b3925ee</namespace>
                 <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
             </properties>
+
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -107,6 +100,25 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>im-live-user-interface</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>im-live-msg-interface</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>im-live-common</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
