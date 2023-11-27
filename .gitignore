@@ -6,4 +6,4 @@
 *.iml
 .idea/**
 
-
+**/.flattened-pom.xml
