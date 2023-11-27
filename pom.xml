@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>im-live</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
         <module>im-live-user</module>
@@ -17,6 +17,91 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
+        <revision>1.0</revision>
+        <java.version>17</java.version>
+        <spring-cloud.version>2022.0.2</spring-cloud.version>
+
+
+
+        <hutool.version>5.8.18</hutool.version>
+        <lombok.version>1.18.26</lombok.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <druid.version>1.1.22</druid.version>
+        <forest.version>1.5.32</forest.version>
+        <oauth2-authorization-server.version>1.1.2</oauth2-authorization-server.version>
+        <spring-boot.version>3.1.4</spring-boot.version>
+        <sms4j.version>3.0.3</sms4j.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <profiles.active>dev</profiles.active>
+                <nacos.server>192.168.101.121:8848</nacos.server>
+                <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
+                <namespace>c109e596-547f-4388-bf5d-998a1f4d87ff</namespace>
+                <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
+            </properties>
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>KubeSphere</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <profiles.active>KubeSphere</profiles.active>
+                <nacos.server>192.168.101.13:8848</nacos.server>
+                <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
+                <namespace>78c428bd-5817-4262-b9ab-eec29b3925ee</namespace>
+                <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
+            </properties>
+        </profile>
+    </profiles>
+    <build>
+        <plugins>
+
+
+            <!-- 统一版本号管理 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
+
+
 
 </project>
