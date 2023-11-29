@@ -10,6 +10,10 @@ spring:
   profiles:
     # 环境配置
     active: @profiles.active@
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:sharding.yaml
+
 
 --- # nacos 配置
 spring:

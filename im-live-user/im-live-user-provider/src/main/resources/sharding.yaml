@@ -1,0 +1,46 @@
+dataSources:
+  user_master:
+    url: jdbc:mysql://mysql.im-live:3306/user?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+
+    type: com.alibaba.druid.pool.DruidDataSource
+  user_slave0:
+    url: jdbc:mysql://mysql-slave.im-live:3306/user?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
+
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+
+rules:
+  - !READWRITE_SPLITTING
+    dataSources:
+      user_ds:
+        staticStrategy:
+          writeDataSourceName: user_master
+          readDataSourceNames:
+            - user_slave0
+  - !SINGLE
+    defaultDataSource: user_ds ## 不分表分分库的默认数据源
+  - !SHARDING
+    tables:
+      user:
+        actualDataNodes: user_ds.user_${(0..99).collect(){it.toString()}}
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: user-inline
+    shardingAlgorithms:
+      user-inline:
+        type: INLINE
+        props:
+          algorithm-expression: user_${(id % 100).toString()}
+props:
+  sql-show: true
+  max-connections-size-per-query: 3
