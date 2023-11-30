@@ -33,7 +33,7 @@ spring:
 
 dubbo:
   application:
-    name: MsgApplication
+    name: ${spring.application.name}
   registry:
     address: nacos://nacos.im-live:8848?namespace=dev
   protocol:

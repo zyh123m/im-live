@@ -1,15 +1,16 @@
 server:
-  port: 18880
+  port: 8888
   servlet:
-    context-path: /user-api
+    context-path: /auth-api
 spring:
   main:
     banner-mode: off
   application:
-    name: im-live-user
+    name: im-live-auth
   profiles:
     # 环境配置
     active: @profiles.active@
+
 --- # nacos 配置
 spring:
   cloud:

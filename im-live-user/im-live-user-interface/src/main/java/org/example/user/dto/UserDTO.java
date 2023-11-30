@@ -1,32 +1,28 @@
-package com.example.user.entity;
+package org.example.user.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * 
  * @TableName user
  */
-@TableName(value ="user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements Serializable {
+public class UserDTO implements Serializable {
     /**
      * 
      */
-    @TableId(type = IdType.AUTO)
+
     private Long id;
 
     /**
@@ -129,6 +125,5 @@ public class User implements Serializable {
      */
     private Date updateTime;
 
-    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

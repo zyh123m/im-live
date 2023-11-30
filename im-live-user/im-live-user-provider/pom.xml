@@ -44,6 +44,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>im-live-redis-starter</artifactId>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
         </dependency>
@@ -58,10 +64,7 @@
             <artifactId>im-live-user-interface</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>im-live-common</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>com.baomidou</groupId>

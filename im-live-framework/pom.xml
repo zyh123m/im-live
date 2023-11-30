@@ -8,11 +8,11 @@
         <artifactId>im-live</artifactId>
         <version>${revision}</version>
     </parent>
-    <packaging>pom</packaging>
 
-    <artifactId>im-live-auth</artifactId>
+    <artifactId>im-live-framework</artifactId>
+    <packaging>pom</packaging>
     <modules>
-        <module>im-live-auth-interface</module>
-        <module>im-live-auth-provider</module>
+        <module>im-live-redis-starter</module>
     </modules>
+
 </project>

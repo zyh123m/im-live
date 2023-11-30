@@ -10,7 +10,12 @@
     </parent>
 
     <artifactId>im-live-user-interface</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>im-live-common</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>
