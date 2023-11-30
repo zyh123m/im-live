@@ -12,6 +12,7 @@
         <module>im-live-user</module>
         <module>im-live-msg</module>
         <module>im-live-common</module>
+        <module>im-live-auth</module>
     </modules>
 
     <properties>

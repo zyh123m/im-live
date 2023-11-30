@@ -15,6 +15,7 @@ spring:
     url: jdbc:shardingsphere:classpath:sharding.yaml
 
 
+
 --- # nacos 配置
 spring:
   cloud:
