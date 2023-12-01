@@ -3,6 +3,7 @@ package com.example.auth.config;
 
 import com.example.auth.constant.RedisConstants;
 import com.example.auth.constant.SecurityConstants;
+import com.example.auth.token.FederatedIdentityIdTokenCustomizer;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
@@ -159,9 +160,7 @@ public class AuthorizationServerConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder()
-                .issuer("http://www.im.com/auth-api")
-                .build();
+        return AuthorizationServerSettings.builder().build();
     }
 
 
@@ -181,6 +180,7 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.PASSWORD)
                 .authorizationGrantType(new AuthorizationGrantType(SecurityConstants.GRANT_TYPE_SMS_CODE))
                 .redirectUri(SecurityConstants.LOGIN_URL)
+                .postLogoutRedirectUri(SecurityConstants.LOGIN_URL)
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 .scope("USER")

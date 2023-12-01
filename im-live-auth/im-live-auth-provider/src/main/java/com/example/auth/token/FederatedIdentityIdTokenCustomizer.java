@@ -1,4 +1,4 @@
-package com.example.auth.config;
+package com.example.auth.token;
 
 
 import com.example.auth.constant.SecurityConstants;

@@ -5,6 +5,7 @@ spring:
     url: jdbc:mysql://mysql.im-live:3306/auth?serverTimezone=Asia/Shanghai&userUnicode=true&characterEncoding=utf-8&ssl-mode=REQUIRED
     username: root
     password: root
+    type: com.alibaba.druid.pool.DruidDataSource
   data:
     redis:
       host: redis.im-live
@@ -18,3 +19,8 @@ spring:
           max-wait: -1    # 最大阻塞等待时间，负值表示没限制，默认-1
           max-idle: 8     # 最大空闲连接，默认8
           min-idle: 0     # 最小空闲连接，默认0
+
+logging:
+  level:
+    com.com.example.auth: debug
+    org.springframework.security: trace

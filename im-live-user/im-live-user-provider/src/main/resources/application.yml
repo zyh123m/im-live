@@ -1,5 +1,5 @@
 server:
-  port: 18880
+  port: 8880
   servlet:
     context-path: /user-api
 spring:
@@ -37,4 +37,4 @@ dubbo:
     address: nacos://nacos.im-live:8848?namespace=dev
   protocol:
     name: tri
-    port: 50051
+    port: 18880

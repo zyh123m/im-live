@@ -1,11 +1,13 @@
 package com.example.auth.config;
 
 
+import com.example.auth.constant.SecurityConstants;
 import com.example.auth.util.SecurityUtils;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 
@@ -22,6 +25,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true)
 public class SecurityConfig {
+
 
     @Bean
     @Order(1)
@@ -46,6 +50,7 @@ public class SecurityConfig {
                 .accessDeniedHandler(SecurityUtils::exceptionHandler)
                 .authenticationEntryPoint(SecurityUtils::exceptionHandler)
         );
+
         DefaultSecurityFilterChain build = http.build();
 
 
@@ -53,9 +58,6 @@ public class SecurityConfig {
 
 
     }
-
-
-
 
 
 }

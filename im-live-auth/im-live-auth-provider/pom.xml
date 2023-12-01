@@ -80,6 +80,17 @@
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
         </dependency>
 
+        <!--解决报错 java.lang.ClassNotFoundException: org.springframework.security.cas.jackson2.CasJackson2Module -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>

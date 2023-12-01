@@ -38,4 +38,4 @@ dubbo:
     address: nacos://nacos.im-live:8848?namespace=dev
   protocol:
     name: tri
-    port: 50051
+    port: 18888

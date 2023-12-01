@@ -20,27 +20,24 @@ import org.springframework.stereotype.Service;
 public class AuthUserServiceImpl implements AuthUserService {
 
 
-
     @Autowired
     PasswordEncoder passwordEncoder;
 
 
     @DubboReference
     UserRpcService userRpcService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDTO userDTO = null;
-        if (PhoneNumberUtils.isMobile(username)) {
-            userDTO = userRpcService.getUserByUsername(username);
-            if (userDTO == null) {
-                throw new UsernameNotFoundException("用户不存在");
-            }
+        userDTO = userRpcService.getUserByUsername(username);
+        if (userDTO == null) {
+            throw new UsernameNotFoundException("用户不存在");
         }
-
         return User.withUsername(userDTO.getUsername())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .authorities("user")
-                .roles("USER","message.read","message.write")
+                .roles("USER", "message.read", "message.write")
                 .build();
 
     }
@@ -55,10 +52,6 @@ public class AuthUserServiceImpl implements AuthUserService {
     public Result userInfo() {
         return null;
     }
-
-
-
-
 
 
 }
