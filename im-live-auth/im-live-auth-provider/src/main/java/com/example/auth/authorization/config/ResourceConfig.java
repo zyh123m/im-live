@@ -1,15 +1,11 @@
-package com.example.auth.config;
+package com.example.auth.authorization.config;
 
-import com.alibaba.fastjson.JSON;
 import com.example.auth.constant.SecurityConstants;
-import com.example.auth.handler.LoginFailureHandler;
-import com.example.auth.handler.LoginSuccessHandler;
+import com.example.auth.handler.ServerLoginFailureHandler;
+import com.example.auth.handler.ServerLoginSuccessHandler;
+import com.example.auth.handler.ServerLogoutSuccessHandler;
 import com.example.auth.util.SecurityUtils;
 import jakarta.annotation.Resource;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.example.common.response.Result;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -18,14 +14,10 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 
 @Configuration
@@ -53,23 +45,20 @@ public class ResourceConfig {
                 )
                 .userDetailsService(userDetailsService)
                 .formLogin(formLogin ->
-                        formLogin.loginProcessingUrl(SecurityConstants.LOGIN_PATH)
+                        formLogin
+                                .loginProcessingUrl(SecurityConstants.LOGIN_PATH)
                                 // 登录成功和失败改为写回json，不重定向了
-                                .successHandler(new LoginSuccessHandler())
-                                .failureHandler(new LoginFailureHandler())
+                                .successHandler(new ServerLoginSuccessHandler())
+                                .failureHandler(new ServerLoginFailureHandler())
                 )
-                .logout(logoutConfigurer -> {
-                    logoutConfigurer.logoutUrl(SecurityConstants.LOGOUT_PATH)
-                            .logoutSuccessHandler(new LogoutSuccessHandler() {
-                                @Override
-                                public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                                    Result<String> success = Result.OK();
-                                    response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-                                    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                                    response.getWriter().write(JSON.toJSONString(success));
-                                    response.getWriter().flush();
-                                }
-                            });
+                .logout(formLogout -> {
+                    formLogout
+
+                            .logoutUrl(SecurityConstants.LOGOUT_PATH)
+                            .logoutSuccessHandler(new ServerLogoutSuccessHandler())
+                            .invalidateHttpSession(true)
+                            .deleteCookies("JSESSIONID")
+                    ;
                 })
         ;
         http.oauth2ResourceServer((resourceServer) -> resourceServer
@@ -77,6 +66,14 @@ public class ResourceConfig {
                 .accessDeniedHandler(SecurityUtils::exceptionHandler)
                 .authenticationEntryPoint(SecurityUtils::exceptionHandler)
         );
+//        http
+//                // 当未登录时访问认证端点时重定向至login页面
+//                .exceptionHandling((exceptions) -> exceptions
+//                        .defaultAuthenticationEntryPointFor(
+//                                new LoginUrlAuthenticationEntryPoint(SecurityConstants.LOGIN_PATH),
+//                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+//                        )
+//                );
         return http.build();
     }
 

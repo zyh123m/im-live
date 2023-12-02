@@ -1,4 +1,4 @@
-package com.example.auth.config;
+package com.example.auth.authorization.config;
 
 
 import com.example.auth.constant.RedisConstants;
@@ -191,6 +191,30 @@ public class AuthorizationServerConfig {
         RegisteredClient repositoryByClientId = registeredClientRepository.findByClientId(registeredClient.getClientId());
         if (repositoryByClientId == null) {
             registeredClientRepository.save(registeredClient);
+        }
+
+        RegisteredClient registeredClient2  = RegisteredClient.withId(UUID.randomUUID().toString())
+                .tokenSettings(tokenSettings)
+                .clientId("client2")
+                .clientSecret(passwordEncoder.encode("secret"))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                .authorizationGrantType(new AuthorizationGrantType(SecurityConstants.GRANT_TYPE_SMS_CODE))
+                .redirectUri("http://www.baidu.com")
+                .postLogoutRedirectUri(SecurityConstants.LOGIN_URL)
+                .scope(OidcScopes.OPENID)
+                .scope(OidcScopes.PROFILE)
+                .scope("USER")
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                .build();
+
+        // 初始化客户端
+        RegisteredClient repositoryByClientId2 = registeredClientRepository.findByClientId(registeredClient.getClientId());
+        if (repositoryByClientId2 == null) {
+            registeredClientRepository.save(registeredClient2);
         }
         return registeredClientRepository;
     }
