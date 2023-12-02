@@ -212,7 +212,7 @@ public class AuthorizationServerConfig {
                 .build();
 
         // 初始化客户端
-        RegisteredClient repositoryByClientId2 = registeredClientRepository.findByClientId(registeredClient.getClientId());
+        RegisteredClient repositoryByClientId2 = registeredClientRepository.findByClientId(registeredClient2.getClientId());
         if (repositoryByClientId2 == null) {
             registeredClientRepository.save(registeredClient2);
         }

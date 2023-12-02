@@ -47,9 +47,9 @@ public class ResourceConfig {
                 .formLogin(formLogin ->
                         formLogin
                                 .loginProcessingUrl(SecurityConstants.LOGIN_PATH)
-                                // 登录成功和失败改为写回json，不重定向了
-                                .successHandler(new ServerLoginSuccessHandler())
-                                .failureHandler(new ServerLoginFailureHandler())
+//                                // 登录成功和失败改为写回json，不重定向了
+//                                .successHandler(new ServerLoginSuccessHandler())
+//                                .failureHandler(new ServerLoginFailureHandler())
                 )
                 .logout(formLogout -> {
                     formLogout
@@ -66,14 +66,7 @@ public class ResourceConfig {
                 .accessDeniedHandler(SecurityUtils::exceptionHandler)
                 .authenticationEntryPoint(SecurityUtils::exceptionHandler)
         );
-//        http
-//                // 当未登录时访问认证端点时重定向至login页面
-//                .exceptionHandling((exceptions) -> exceptions
-//                        .defaultAuthenticationEntryPointFor(
-//                                new LoginUrlAuthenticationEntryPoint(SecurityConstants.LOGIN_PATH),
-//                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-//                        )
-//                );
+
         return http.build();
     }
 

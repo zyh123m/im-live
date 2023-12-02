@@ -219,8 +219,6 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
         // 获取手机号密码
         Map<String, Object> additionalParameters = authenticationToken.getAdditionalParameters();
         String username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
-
-
         String password = username.replace("username", "password");
         //添加校验逻辑
         UsernamePasswordAuthenticationToken unauthenticated = UsernamePasswordAuthenticationToken.unauthenticated(username, password);

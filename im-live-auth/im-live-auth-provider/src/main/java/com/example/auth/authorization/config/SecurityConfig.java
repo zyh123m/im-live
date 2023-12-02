@@ -41,6 +41,14 @@ public class SecurityConfig {
         //配置Oidc
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());
 
+        http
+                .exceptionHandling((exceptions) -> exceptions
+                        .defaultAuthenticationEntryPointFor(
+                                new LoginUrlAuthenticationEntryPoint(SecurityConstants.LOGIN_URL),
+                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+                        )
+                );
+
         //基础配置
         http.oauth2ResourceServer((resourceServer) -> resourceServer
                 .jwt(Customizer.withDefaults())
@@ -48,14 +56,7 @@ public class SecurityConfig {
                 .authenticationEntryPoint(SecurityUtils::exceptionHandler)
         );
 
-//        http
-//                // 当未登录时访问认证端点时重定向至login页面
-//                .exceptionHandling((exceptions) -> exceptions
-//                        .defaultAuthenticationEntryPointFor(
-//                                new LoginUrlAuthenticationEntryPoint(SecurityConstants.LOGIN_PATH),
-//                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-//                        )
-//                );
+
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 // 让认证服务器元数据中有自定义的认证方式
                 .authorizationServerMetadataEndpoint(metadata ->
@@ -66,7 +67,7 @@ public class SecurityConfig {
                                             SecurityConstants.GRANT_TYPE_PASSWORD
                                     ));
                 }))
-                // 添加自定义grant_type——短信认证登录
+                // 添加自定义grant_type
                 .tokenEndpoint(tokenEndpoint -> tokenEndpoint
                         .accessTokenRequestConverters(x->
                                 x.addAll(Arrays.asList(
@@ -75,10 +76,7 @@ public class SecurityConfig {
 
         DefaultSecurityFilterChain build = http.build();
         addCustomOAuth2GrantAuthenticationProvider(http);
-
         return build;
-
-
     }
 
     /**
