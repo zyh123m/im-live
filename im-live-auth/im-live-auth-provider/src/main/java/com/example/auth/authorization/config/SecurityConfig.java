@@ -4,6 +4,7 @@ package com.example.auth.authorization.config;
 import com.example.auth.constant.SecurityConstants;
 import com.example.auth.authorization.password.PasswordGrantAuthenticationConverter;
 import com.example.auth.authorization.password.PasswordGrantAuthenticationProvider;
+import com.example.auth.handler.LoginTargetAuthenticationEntryPoint;
 import com.example.auth.util.SecurityUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +44,7 @@ public class SecurityConfig {
         http
                 .exceptionHandling((exceptions) -> exceptions
                         .defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint(SecurityConstants.LOGIN_PATH),
+                                new LoginTargetAuthenticationEntryPoint(SecurityConstants.LOGIN_URL),
                                 new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
                         )
                 );

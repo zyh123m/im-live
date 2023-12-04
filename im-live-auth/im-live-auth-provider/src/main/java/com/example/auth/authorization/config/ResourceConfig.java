@@ -49,10 +49,10 @@ public class ResourceConfig {
                 .userDetailsService(userDetailsService)
                 .formLogin(formLogin ->
                                 formLogin
-                                        //.loginPage(SecurityConstants.LOGIN_URL)
+                                        .loginPage(SecurityConstants.LOGIN_URL)
                                         .loginProcessingUrl(SecurityConstants.LOGIN_PATH)
                                 // 登录成功和失败改为写回json，不重定向了
-                                //.successHandler(new ServerLoginSuccessHandler())
+                                .successHandler(new ServerLoginSuccessHandler())
                                 .failureHandler(new ServerLoginFailureHandler())
                 )
                 .logout(formLogout -> {

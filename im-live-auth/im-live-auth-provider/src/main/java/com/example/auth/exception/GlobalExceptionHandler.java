@@ -1,5 +1,6 @@
 package com.example.auth.exception;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 import org.example.common.response.Result;
@@ -27,5 +28,9 @@ public class GlobalExceptionHandler {
         return Result.error(500,e.getMessage());
     }
 
-
+    @ExceptionHandler(Exception.class)
+    public Result<Object> exception(Exception e, HttpServletRequest request) {
+        log.error("接口[{}]调用失败，原因：{}", request.getRequestURI(), e.getMessage(), e);
+        return Result.error(500,e.getMessage());
+    }
 }
