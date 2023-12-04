@@ -31,7 +31,6 @@ import java.util.Arrays;
 @EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true)
 public class SecurityConfig {
 
-
     @Bean
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -44,11 +43,10 @@ public class SecurityConfig {
         http
                 .exceptionHandling((exceptions) -> exceptions
                         .defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint(SecurityConstants.LOGIN_URL),
+                                new LoginUrlAuthenticationEntryPoint(SecurityConstants.LOGIN_PATH),
                                 new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
                         )
                 );
-
         //基础配置
         http.oauth2ResourceServer((resourceServer) -> resourceServer
                 .jwt(Customizer.withDefaults())
@@ -73,7 +71,6 @@ public class SecurityConfig {
                                 x.addAll(Arrays.asList(
                                         new PasswordGrantAuthenticationConverter()
                                 ))));
-
         DefaultSecurityFilterChain build = http.build();
         addCustomOAuth2GrantAuthenticationProvider(http);
         return build;

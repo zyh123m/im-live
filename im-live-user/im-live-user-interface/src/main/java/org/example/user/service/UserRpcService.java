@@ -5,4 +5,6 @@ import org.example.user.dto.UserDTO;
 public interface UserRpcService {
 
     UserDTO getUserByUsername(String username);
+
+
 }
