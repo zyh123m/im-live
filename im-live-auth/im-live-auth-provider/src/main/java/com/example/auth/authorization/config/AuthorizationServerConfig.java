@@ -55,7 +55,7 @@ public class AuthorizationServerConfig {
 
     //token 有效期设置
     public static final TokenSettings tokenSettings = TokenSettings.builder()
-            .accessTokenTimeToLive(Duration.ofSeconds(20))
+            .accessTokenTimeToLive(Duration.ofMinutes(20))
             .refreshTokenTimeToLive(Duration.ofMinutes(60))
             .build();
 

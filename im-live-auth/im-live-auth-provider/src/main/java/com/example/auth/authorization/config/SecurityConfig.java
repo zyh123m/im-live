@@ -7,9 +7,11 @@ import com.example.auth.authorization.password.PasswordAuthenticationProvider;
 import com.example.auth.handler.ImLiveExceptionEntryPoint;
 import com.example.auth.handler.ImLiveAuthorizationFailureHandler;
 import com.example.auth.handler.ImLiveAuthorizationSuccessHandler;
+import com.example.auth.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -31,7 +33,7 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    @Order(1)
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
                                                                       AuthenticationManager authenticationManager,
                                                                       OAuth2AuthorizationService authorizationService,
@@ -50,8 +52,7 @@ public class SecurityConfig {
                                             SecurityConstants.GRANT_TYPE_SMS_CODE,
                                             SecurityConstants.GRANT_TYPE_PASSWORD
                                     ));
-                        })
-                )
+                        }))
                 .tokenEndpoint(tokenEndpoint -> tokenEndpoint
                         .accessTokenRequestConverters(converters ->
                                 converters.addAll(List.of(
@@ -59,18 +60,19 @@ public class SecurityConfig {
                                 )))
                         .authenticationProviders(providers ->
                                 providers.addAll(List.of(
-                                        new PasswordAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService))
-                                ))
+                                        new PasswordAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService)
+                                )))
                         .accessTokenResponseHandler(new ImLiveAuthorizationSuccessHandler()) // 自定义成功响应
                         .errorResponseHandler(new ImLiveAuthorizationFailureHandler())
                 );
+
         http
                 // 当未登录时访问认证端点时重定向至login页面
                 .exceptionHandling((exceptions) -> exceptions
-                        //.accessDeniedHandler(SecurityUtils::exceptionHandler)
                         .authenticationEntryPoint(new ImLiveExceptionEntryPoint())
                 )
                 .oauth2ResourceServer((resourceServer) -> resourceServer
+                        .authenticationEntryPoint(new ImLiveExceptionEntryPoint())
                         .jwt(Customizer.withDefaults())
                 );
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
@@ -80,10 +82,8 @@ public class SecurityConfig {
                 .apply(authorizationServerConfigurer);
 
 
-
         return http.build();
     }
-
 
 
 }

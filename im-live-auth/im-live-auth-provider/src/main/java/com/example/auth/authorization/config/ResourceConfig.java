@@ -27,10 +27,10 @@ public class ResourceConfig {
     CorsFilter corsFilter;
     @Resource
     UserDetailsService userDetailsService;
+    public static final String JSESSIONID="JSESSIONID";
 
 
     @Bean
-    @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
 
@@ -39,11 +39,7 @@ public class ResourceConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authorize) -> authorize
-                        // 放行静态资源
-                        .requestMatchers("/error").permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
                 .userDetailsService(userDetailsService)
                 .formLogin(formLogin ->
                                 formLogin
@@ -58,13 +54,8 @@ public class ResourceConfig {
                             .logoutUrl(SecurityConstants.LOGOUT_PATH)
                             .logoutSuccessHandler(new ImLiveLogoutHandler())
                             .invalidateHttpSession(true)
-                            .deleteCookies("JSESSIONID");
-                })
-        ;
-
-
-
-
+                            .deleteCookies(JSESSIONID);
+                });
         return http.build();
     }
 
