@@ -13,7 +13,10 @@ public class AuthController {
     }
 
 
-
+    @PostMapping("/hello")
+    public Result hello(){
+        return Result.OK("test success");
+    }
 
 
 }

@@ -4,13 +4,13 @@ package com.example.auth.authorization.config;
 import com.example.auth.constant.SecurityConstants;
 import com.example.auth.authorization.password.PasswordAuthenticationConverter;
 import com.example.auth.authorization.password.PasswordAuthenticationProvider;
+import com.example.auth.handler.ImLiveExceptionEntryPoint;
 import com.example.auth.handler.ImLiveAuthorizationFailureHandler;
-import com.example.auth.handler.LoginTargetAuthenticationEntryPoint;
 import com.example.auth.handler.ImLiveAuthorizationSuccessHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -19,14 +19,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.util.List;
 
-
+@Slf4j
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true)
@@ -34,14 +32,10 @@ public class SecurityConfig {
 
     @Bean
     @Order(1)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(            HttpSecurity http,
-                                                                                  AuthenticationManager authenticationManager,
-                                                                                  OAuth2AuthorizationService authorizationService,
-                                                                                  OAuth2TokenGenerator<?> tokenGenerator
-
-
-
-                                                                      ) throws Exception {
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
+                                                                      AuthenticationManager authenticationManager,
+                                                                      OAuth2AuthorizationService authorizationService,
+                                                                      OAuth2TokenGenerator<?> tokenGenerator) throws Exception {
 
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 
@@ -70,6 +64,15 @@ public class SecurityConfig {
                         .accessTokenResponseHandler(new ImLiveAuthorizationSuccessHandler()) // 自定义成功响应
                         .errorResponseHandler(new ImLiveAuthorizationFailureHandler())
                 );
+        http
+                // 当未登录时访问认证端点时重定向至login页面
+                .exceptionHandling((exceptions) -> exceptions
+                        //.accessDeniedHandler(SecurityUtils::exceptionHandler)
+                        .authenticationEntryPoint(new ImLiveExceptionEntryPoint())
+                )
+                .oauth2ResourceServer((resourceServer) -> resourceServer
+                        .jwt(Customizer.withDefaults())
+                );
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
         http.securityMatcher(endpointsMatcher)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
@@ -77,16 +80,8 @@ public class SecurityConfig {
                 .apply(authorizationServerConfigurer);
 
 
-        http
-                .exceptionHandling((exceptions) -> exceptions
-                        .defaultAuthenticationEntryPointFor(
-                                new LoginTargetAuthenticationEntryPoint(SecurityConstants.LOGIN_URL),
-                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-                        )
-                );
-        DefaultSecurityFilterChain build = http.build();
 
-        return build;
+        return http.build();
     }
 
 

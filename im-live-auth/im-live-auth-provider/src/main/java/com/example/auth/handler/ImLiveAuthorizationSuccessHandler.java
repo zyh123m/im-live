@@ -56,9 +56,7 @@ public class ImLiveAuthorizationSuccessHandler implements AuthenticationSuccessH
 
         if(authentication instanceof UsernamePasswordAuthenticationToken){
             Result<String> success = Result.OK();
-
             this.accessTokenHttpResponseConverter.write(success, null, httpResponse);
-
         }else{
             OAuth2AccessTokenAuthenticationToken accessTokenAuthentication =
                     (OAuth2AccessTokenAuthenticationToken) authentication;
@@ -80,10 +78,8 @@ public class ImLiveAuthorizationSuccessHandler implements AuthenticationSuccessH
                 builder.additionalParameters(additionalParameters);
             }
             OAuth2AccessTokenResponse accessTokenResponse = builder.build();
-
             Map<String, Object> tokenResponseParameters = this.accessTokenResponseParametersConverter
                     .convert(accessTokenResponse);
-
             this.accessTokenHttpResponseConverter.write(Result.OK(tokenResponseParameters), null, httpResponse);
         }
 

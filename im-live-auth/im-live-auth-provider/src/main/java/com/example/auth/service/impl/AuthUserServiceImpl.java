@@ -1,6 +1,5 @@
 package com.example.auth.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.auth.service.AuthUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.example.common.response.Result;

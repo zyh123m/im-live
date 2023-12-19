@@ -99,7 +99,7 @@ public class SecurityUtils {
         response.addHeader(HttpHeaders.WWW_AUTHENTICATE, wwwAuthenticate);
         try {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.getWriter().write(JSON.toJSONString(Result.error(500,parameters.toString())));
+            response.getWriter().write(JSON.toJSONString(Result.error(parameters.get("error"))));
             response.getWriter().flush();
         } catch (IOException ex) {
             log.error("写回错误信息失败", e);
