@@ -1,6 +1,5 @@
 package com.example.auth.authorization.password;
 
-import com.example.auth.exception.InvalidParamException;
 import com.example.auth.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -41,7 +40,7 @@ import java.util.stream.Collectors;
 
 
 @Slf4j
-public class PasswordGrantAuthenticationProvider implements AuthenticationProvider {
+public class PasswordAuthenticationProvider implements AuthenticationProvider {
 
     private OAuth2TokenGenerator<?> tokenGenerator;
 
@@ -53,7 +52,7 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
 
     private static final OAuth2TokenType ID_TOKEN_TOKEN_TYPE = new OAuth2TokenType(OidcParameterNames.ID_TOKEN);
 
-    public PasswordGrantAuthenticationProvider(OAuth2TokenGenerator<?> tokenGenerator, AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService) {
+    public PasswordAuthenticationProvider(OAuth2TokenGenerator<?> tokenGenerator, AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService) {
         this.tokenGenerator = tokenGenerator;
         this.authenticationManager = authenticationManager;
         this.authorizationService = authorizationService;
@@ -61,7 +60,7 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        PasswordGrantAuthenticationToken authenticationToken = (PasswordGrantAuthenticationToken) authentication;
+        PasswordAuthenticationToken authenticationToken = (PasswordAuthenticationToken) authentication;
 
         // Ensure the client is authenticated
         OAuth2ClientAuthenticationToken clientPrincipal =
@@ -218,7 +217,7 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
      * @param authenticationToken converter构建的认证信息，这里是包含手机号与验证码的
      * @return 认证信息
      */
-    public Authentication getAuthenticatedUser(PasswordGrantAuthenticationToken authenticationToken) {
+    public Authentication getAuthenticatedUser(PasswordAuthenticationToken authenticationToken) {
         // 获取手机号密码
         Map<String, Object> additionalParameters = authenticationToken.getAdditionalParameters();
         String username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
@@ -237,10 +236,7 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return PasswordGrantAuthenticationToken.class.isAssignableFrom(authentication);
+        return PasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
-
-
-
 }
 

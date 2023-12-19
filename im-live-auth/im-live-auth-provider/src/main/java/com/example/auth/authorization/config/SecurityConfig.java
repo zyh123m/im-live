@@ -2,8 +2,8 @@ package com.example.auth.authorization.config;
 
 
 import com.example.auth.constant.SecurityConstants;
-import com.example.auth.authorization.password.PasswordGrantAuthenticationConverter;
-import com.example.auth.authorization.password.PasswordGrantAuthenticationProvider;
+import com.example.auth.authorization.password.PasswordAuthenticationConverter;
+import com.example.auth.authorization.password.PasswordAuthenticationProvider;
 import com.example.auth.handler.ImLiveAuthorizationFailureHandler;
 import com.example.auth.handler.LoginTargetAuthenticationEntryPoint;
 import com.example.auth.handler.ImLiveAuthorizationSuccessHandler;
@@ -24,7 +24,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -53,7 +52,7 @@ public class SecurityConfig {
                 .authorizationServerMetadataEndpoint(metadata ->
                         metadata.authorizationServerMetadataCustomizer(customizer -> {
                             customizer.grantTypes(x ->
-                                    Arrays.asList(
+                                    List.of(
                                             SecurityConstants.GRANT_TYPE_SMS_CODE,
                                             SecurityConstants.GRANT_TYPE_PASSWORD
                                     ));
@@ -62,11 +61,11 @@ public class SecurityConfig {
                 .tokenEndpoint(tokenEndpoint -> tokenEndpoint
                         .accessTokenRequestConverters(converters ->
                                 converters.addAll(List.of(
-                                        new PasswordGrantAuthenticationConverter()
+                                        new PasswordAuthenticationConverter()
                                 )))
                         .authenticationProviders(providers ->
                                 providers.addAll(List.of(
-                                        new PasswordGrantAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService))
+                                        new PasswordAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService))
                                 ))
                         .accessTokenResponseHandler(new ImLiveAuthorizationSuccessHandler()) // 自定义成功响应
                         .errorResponseHandler(new ImLiveAuthorizationFailureHandler())
