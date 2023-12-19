@@ -23,12 +23,12 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(InvalidParamException.class)
+    @ExceptionHandler(value = InvalidParamException.class)
     public Result invalidParamException(InvalidParamException e){
         return Result.error(500,e.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(RuntimeException.class)
     public Result<Object> exception(Exception e, HttpServletRequest request) {
         log.error("接口[{}]调用失败，原因：{}", request.getRequestURI(), e.getMessage(), e);
         return Result.error(500,e.getMessage());

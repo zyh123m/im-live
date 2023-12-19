@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 public class InvalidParamException extends RuntimeException{
 
     public InvalidParamException(String message) {
-        super();
-        log.error(message);
+        super(message);
+        //log.error(message);
     }
 
     public InvalidParamException() {

@@ -71,6 +71,7 @@
             <groupId>org.example</groupId>
             <artifactId>im-live-auth-interface</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>im-live-common</artifactId>

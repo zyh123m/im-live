@@ -197,7 +197,10 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
                     .filter(requestedScope -> !registeredClient.getScopes().contains(requestedScope))
                     .collect(Collectors.toSet());
             if (!ObjectUtils.isEmpty(unauthorizedScopes)) {
-                throw new InvalidParamException("认证失败：手机号或验证码错误.");
+
+                OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
+                        "认证失败：scope权限不足", ERROR_URI);
+                throw new OAuth2AuthenticationException(error);
             }
 
             authorizedScopes = new LinkedHashSet<>(requestedScopes);
@@ -219,15 +222,16 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
         // 获取手机号密码
         Map<String, Object> additionalParameters = authenticationToken.getAdditionalParameters();
         String username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
-        String password = username.replace("username", "password");
+        String password = (String) additionalParameters.get(OAuth2ParameterNames.PASSWORD);
         //添加校验逻辑
         UsernamePasswordAuthenticationToken unauthenticated = UsernamePasswordAuthenticationToken.unauthenticated(username, password);
         Authentication authenticate = null;
         try {
             authenticate = authenticationManager.authenticate(unauthenticated);
         } catch (Exception e) {
-            throw new InvalidParamException("认证失败：手机号或验证码错误");
-        }
+            OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
+                    "认证失败：手机号或验证码错误", ERROR_URI);
+            throw new OAuth2AuthenticationException(error);        }
         return authenticate;
     }
 

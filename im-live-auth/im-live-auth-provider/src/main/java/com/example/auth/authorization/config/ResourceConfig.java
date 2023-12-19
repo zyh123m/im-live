@@ -1,17 +1,13 @@
 package com.example.auth.authorization.config;
 
-import com.example.auth.config.CorsConfig;
 import com.example.auth.constant.SecurityConstants;
-import com.example.auth.handler.ServerLoginFailureHandler;
-import com.example.auth.handler.ServerLoginSuccessHandler;
+import com.example.auth.handler.ImLiveAuthorizationFailureHandler;
+import com.example.auth.handler.ImLiveAuthorizationSuccessHandler;
 import com.example.auth.handler.ServerLogoutSuccessHandler;
-import com.example.auth.util.SecurityUtils;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,8 +48,8 @@ public class ResourceConfig {
                                         .loginPage(SecurityConstants.LOGIN_URL)
                                         .loginProcessingUrl(SecurityConstants.LOGIN_PATH)
                                 // 登录成功和失败改为写回json，不重定向了
-                                .successHandler(new ServerLoginSuccessHandler())
-                                .failureHandler(new ServerLoginFailureHandler())
+                                .successHandler(new ImLiveAuthorizationSuccessHandler())
+                                .failureHandler(new ImLiveAuthorizationFailureHandler())
                 )
                 .logout(formLogout -> {
                     formLogout
@@ -64,12 +60,7 @@ public class ResourceConfig {
                     ;
                 })
         ;
-        http
-                .oauth2ResourceServer((resourceServer) -> resourceServer
-                .jwt(Customizer.withDefaults())
-                .accessDeniedHandler(SecurityUtils::exceptionHandler)
-                .authenticationEntryPoint(SecurityUtils::exceptionHandler)
-        );
+
 
         return http.build();
     }

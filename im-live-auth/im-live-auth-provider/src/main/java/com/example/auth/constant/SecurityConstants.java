@@ -24,10 +24,7 @@ public class SecurityConstants {
      */
     public static final String TOKEN_UNIQUE_ID = "uniqueId";
 
-    /**
-     * 随机字符串请求头名字
-     */
-    public static final String NONCE_HEADER_NAME = "nonceId";
+
 
     /**
      * 登录方式入参名

@@ -82,6 +82,14 @@ public class Result<T> implements Serializable {
         r.setSuccess(false);
         return r;
     }
+    public static Result<Object> error( String msg) {
+        Result<Object> r = new Result<Object>();
+        r.setCode(500);
+        r.setMessage(msg);
+        r.setSuccess(false);
+        return r;
+    }
+
 
     /**
      * 无权限访问返回结果
