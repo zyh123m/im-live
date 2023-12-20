@@ -35,9 +35,8 @@ public class ImLiveAuthorizationFailureHandler implements AuthenticationFailureH
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        OAuth2Error error = ((OAuth2AuthenticationException) exception).getError();
         ServletServerHttpResponse httpResponse = new ServletServerHttpResponse(response);
-        Result result = Result.error(error.getDescription());
+        Result result = Result.error(exception.getMessage());
         accessTokenHttpResponseConverter.write(result, null, httpResponse);
     }
 

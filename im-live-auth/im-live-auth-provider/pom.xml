@@ -78,8 +78,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>im-live-redis-starter</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>

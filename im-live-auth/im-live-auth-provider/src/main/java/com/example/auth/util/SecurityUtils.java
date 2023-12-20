@@ -99,7 +99,7 @@ public class SecurityUtils {
         response.addHeader(HttpHeaders.WWW_AUTHENTICATE, wwwAuthenticate);
         try {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.getWriter().write(JSON.toJSONString(Result.error(parameters.get("error"))));
+            response.getWriter().write(JSON.toJSONString(Result.error(parameters.get("error")+": "+parameters.get("error_description"))));
             response.getWriter().flush();
         } catch (IOException ex) {
             log.error("写回错误信息失败", e);
@@ -142,7 +142,7 @@ public class SecurityUtils {
         }
         if (e instanceof InsufficientAuthenticationException) {
             // 没有携带jwt访问接口，没有客户端认证信息
-            parameters.put("error", BearerTokenErrorCodes.INVALID_TOKEN);
+            parameters.put("error", e.getMessage());
             parameters.put("error_description", "Not authorized.");
             parameters.put("error_uri", "https://tools.ietf.org/html/rfc6750#section-3.1");
         }
