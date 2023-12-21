@@ -35,7 +35,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true)
-public class SecurityConfig {
+public class AuthorizationSecurityConfig {
 
     @Resource
     CorsFilter corsFilter;

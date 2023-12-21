@@ -1,0 +1,41 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /web-api
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: im-live-web
+  profiles:
+    # ????
+    active: @profiles.active@
+
+--- # nacos ??
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    nacos:
+      # nacos ????
+      server-addr: @nacos.server@
+      discovery:
+        # ???
+        group: @nacos.discovery.group@
+        namespace: @namespace@
+      config:
+        # ???
+        group: @nacos.config.group@
+        namespace: @namespace@
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: nacos://nacos.im-live:8848?namespace=dev
+  protocol:
+    name: tri
+    port: 18000

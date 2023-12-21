@@ -1,14 +1,14 @@
-package com.example.auth;
+package com.example.api;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableDubbo
 @SpringBootApplication
-public class ImLiveAuthProviderApplication {
+public class ImLiveApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ImLiveAuthProviderApplication.class, args);
+        SpringApplication.run(ImLiveApiApplication.class, args);
     }
 
 }

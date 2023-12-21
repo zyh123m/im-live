@@ -46,7 +46,7 @@ import java.time.Duration;
 import java.util.UUID;
 
 @Configuration
-public class AuthorizationServerConfig {
+public class AuthorizationBasicBeanConfig {
 
 
 
@@ -121,26 +121,19 @@ public class AuthorizationServerConfig {
     @Bean
     @SneakyThrows
     public JWKSource<SecurityContext> jwkSource() {
-        // 先从redis获取
-        String jwkSetCache = redisTemplate.opsForValue().get(RedisConstants.AUTHORIZATION_JWS_PREFIX_KEY);
-        if (ObjectUtils.isEmpty(jwkSetCache)) {
-            KeyPair keyPair = generateRsaKey();
-            RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-            RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-            RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                    .privateKey(privateKey)
-                    .keyID(UUID.randomUUID().toString())
-                    .build();
-            // 生成jws
-            JWKSet jwkSet = new JWKSet(rsaKey);
-            // 转为json字符串
-            String jwkSetString = jwkSet.toString(Boolean.FALSE);
-            // 存入redis
-            redisTemplate.opsForValue().set(RedisConstants.AUTHORIZATION_JWS_PREFIX_KEY, jwkSetString);
-            return new ImmutableJWKSet<>(jwkSet);
-        }
-        // 解析存储的jws
-        JWKSet jwkSet = JWKSet.parse(jwkSetCache);
+
+        KeyPair keyPair = generateRsaKey();
+        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        RSAKey rsaKey = new RSAKey.Builder(publicKey)
+                .privateKey(privateKey)
+                .keyID(UUID.randomUUID().toString())
+                .build();
+        // 生成jws
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        // 转为json字符串
+        String jwkSetString = jwkSet.toString(Boolean.FALSE);
+        // 存入redis
         return new ImmutableJWKSet<>(jwkSet);
     }
 
@@ -164,7 +157,8 @@ public class AuthorizationServerConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().build();
+        return AuthorizationServerSettings.builder()
+                .issuer("http://www.im.com/auth-api").build();
     }
 
     @Bean
