@@ -35,7 +35,7 @@ dubbo:
   application:
     name: ${spring.application.name}
   registry:
-    address: nacos://nacos.im-live:8848?namespace=dev
+    address: nacos://@nacos.server@?namespace=dev
   protocol:
     name: tri
     port: 19999

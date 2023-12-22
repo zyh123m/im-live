@@ -61,6 +61,10 @@
             <groupId>org.example</groupId>
             <artifactId>im-live-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>im-live-user-interface</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

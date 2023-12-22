@@ -207,6 +207,19 @@
                 <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
             </properties>
 
+        </profile>
+
+        <profile>
+            <id>KubeSphereRemote</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <profiles.active>KubeSphereRemote</profiles.active>
+                <nacos.server>43.240.220.48:31103</nacos.server>
+                <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
+                <namespace>dev</namespace>
+                <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
+            </properties>
+
             <activation>
                 <!-- 默认环境 -->
                 <activeByDefault>true</activeByDefault>
