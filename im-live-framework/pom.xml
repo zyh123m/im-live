@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>im-live-redis-starter</module>
+        <module>im-live-oss-starter</module>
     </modules>
 
 </project>
