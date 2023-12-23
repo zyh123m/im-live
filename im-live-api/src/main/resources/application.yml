@@ -12,29 +12,28 @@ spring:
   application:
     name: im-live-web
   profiles:
-    # ????
+    # 环境配置
     active: @profiles.active@
 
---- # nacos ??
+--- # nacos 配置
 spring:
   cloud:
     compatibility-verifier:
       enabled: false
     nacos:
-      # nacos ????
+      # nacos 服务地址
       server-addr: @nacos.server@
       discovery:
-        # ???
+        # 注册组
         group: @nacos.discovery.group@
         namespace: @namespace@
       config:
-        # ???
+        # 配置组
         group: @nacos.config.group@
         namespace: @namespace@
   config:
     import:
       - optional:nacos:${spring.application.name}.yml
-
 dubbo:
   application:
     name: ${spring.application.name}
@@ -48,6 +47,6 @@ dubbo:
 
 minio:
   bucketName: im-live
-  endpoint: http://43.240.220.48:31967
+  endpoint: http://minio.kubesphere-system:9000/
   accessKey: openpitrixminioaccesskey
   secretKey: openpitrixminiosecretkey

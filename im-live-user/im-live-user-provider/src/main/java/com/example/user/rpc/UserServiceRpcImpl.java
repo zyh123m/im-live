@@ -3,6 +3,7 @@ package com.example.user.rpc;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.example.user.entity.User;
 import com.example.user.service.UserService;
 import jakarta.annotation.Resource;
@@ -20,5 +21,10 @@ public class UserServiceRpcImpl implements UserRpcService {
         User user = userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername, username));
         UserDTO userDTO = BeanUtil.toBean(user, UserDTO.class);
         return userDTO ;
+    }
+
+    @Override
+    public Boolean updateUserAvatar(String username, String avatarUrl) {
+        return userService.update(new LambdaUpdateWrapper<User>().set(User::getAvatar,avatarUrl).eq(User::getUsername, username));
     }
 }
