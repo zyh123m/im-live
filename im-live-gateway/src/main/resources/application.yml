@@ -42,7 +42,16 @@ spring:
         - id: msg
           uri: lb://im-live-msg
           predicates:
-            - Path=/msg-api/**
+            - Path=//msg-api/**
+          filters:
+            - PreserveHostHeader
+        # 资源服务代理配置
+        - id: web
+          uri: lb://im-live-web
+          predicates:
+            - Path=/web-api/**
+          filters:
+            - PreserveHostHeader
   config:
     import:
       - optional:nacos:${spring.application.name}.yml

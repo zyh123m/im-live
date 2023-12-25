@@ -158,7 +158,7 @@ public class AuthorizationBasicBeanConfig {
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
-                .issuer("http://www.im.com/auth-api").build();
+                .issuer("http://www.im.com:8080/auth-api").build();
     }
 
     @Bean
