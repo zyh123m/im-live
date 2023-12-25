@@ -15,20 +15,19 @@
         <module>im-live-auth</module>
         <module>im-live-framework</module>
         <module>im-live-api</module>
+        <module>im-live-gateway</module>
     </modules>
 
     <properties>
+        <revision>1.0</revision>
+        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
-        <revision>1.0</revision>
-        <java.version>17</java.version>
-
         <spring-boot.version>3.1.4</spring-boot.version>
         <lb.version>4.0.4</lb.version>
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
-
         <fastjson.version>1.2.67_noneautotype2</fastjson.version>
         <hutool.version>5.7.17</hutool.version>
         <lombok.version>1.18.26</lombok.version>
@@ -88,6 +87,13 @@
                 <version>${lb.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>4.0.4</version>
+
+            </dependency>
+
 
             <dependency>
                 <groupId>org.example</groupId>
@@ -104,6 +110,11 @@
             <dependency>
                 <groupId>org.example</groupId>
                 <artifactId>im-live-auth-interface</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>im-live-nacos-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -214,6 +225,7 @@
                 <nacos.discovery.group>DEFAULT_GROUP</nacos.discovery.group>
                 <namespace>dev</namespace>
                 <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
+                <nginx>nginx.im-live</nginx>
             </properties>
             <activation>
                 <!-- 默认环境 -->

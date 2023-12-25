@@ -8,10 +8,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 @EnableDubbo
 @SpringBootApplication
-public class ImLiveMsgProviderApplication {
+public class ImLiveMsgApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ImLiveMsgProviderApplication.class, args);
+        SpringApplication.run(ImLiveMsgApplication.class, args);
     }
 
 }

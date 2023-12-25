@@ -20,14 +20,8 @@
     <dependencies>
         <!-- SpringCloud Alibaba Nacos -->
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <!-- SpringCloud Alibaba Nacos Config -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <groupId>org.example</groupId>
+            <artifactId>im-live-nacos-starter</artifactId>
         </dependency>
 
         <dependency>
@@ -76,7 +70,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.example.msg.ImLiveMsgProviderApplication</mainClass>
+                    <mainClass>com.example.msg.ImLiveMsgApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>
