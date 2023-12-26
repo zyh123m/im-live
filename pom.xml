@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>com.example</groupId>
     <artifactId>im-live</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -16,6 +16,7 @@
         <module>im-live-framework</module>
         <module>im-live-api</module>
         <module>im-live-gateway</module>
+        <module>im-live-id-generator</module>
     </modules>
 
     <properties>
@@ -93,44 +94,50 @@
                 <version>4.0.4</version>
 
             </dependency>
-
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>im-live-id-generator-interface</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>im-live-user-interface</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>im-live-msg-interface</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>im-live-auth-interface</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>im-live-nacos-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>im-live-redis-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>im-live-oss-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
+
+
             <dependency>
-                <groupId>org.example</groupId>
+                <groupId>com.example</groupId>
                 <artifactId>im-live-common</artifactId>
                 <version>${revision}</version>
             </dependency>

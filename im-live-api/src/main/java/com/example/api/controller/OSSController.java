@@ -1,15 +1,12 @@
 package com.example.api.controller;
 
-import cn.hutool.core.util.StrUtil;
-import io.minio.ObjectWriteResponse;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.compress.utils.IOUtils;
-import org.example.common.MinioConfig;
-import org.example.common.MinioUtils;
-import org.example.common.response.Result;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.common.MinioConfig;
+import com.example.common.MinioUtils;
+import com.example.common.response.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,17 +1,9 @@
 package com.example.api.controller;
 
 import com.example.api.service.UserService;
-import com.example.api.utils.LoginUserUtils;
 import jakarta.annotation.Resource;
-import org.apache.dubbo.config.annotation.DubboReference;
-import org.example.common.response.Result;
-import org.example.user.dto.UserDTO;
-import org.example.user.service.UserRpcService;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import com.example.common.response.Result;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 

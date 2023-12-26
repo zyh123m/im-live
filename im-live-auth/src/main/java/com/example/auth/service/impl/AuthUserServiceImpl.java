@@ -2,13 +2,10 @@ package com.example.auth.service.impl;
 
 import com.example.auth.service.AuthUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.example.common.response.Result;
-import org.example.common.utils.PhoneNumberUtils;
+import com.example.common.response.Result;
 import org.example.user.dto.UserDTO;
 import org.example.user.service.UserRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

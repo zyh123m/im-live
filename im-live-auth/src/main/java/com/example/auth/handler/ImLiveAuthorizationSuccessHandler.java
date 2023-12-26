@@ -1,12 +1,10 @@
 package com.example.auth.handler;
 
 
-import com.alibaba.fastjson.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.common.response.Result;
+import com.example.common.response.Result;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
@@ -21,7 +19,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 

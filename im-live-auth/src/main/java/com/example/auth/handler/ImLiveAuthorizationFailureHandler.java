@@ -1,23 +1,17 @@
 package com.example.auth.handler;
 
 
-import com.alibaba.fastjson.JSON;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.example.common.response.Result;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import com.example.common.response.Result;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * 登录失败处理类

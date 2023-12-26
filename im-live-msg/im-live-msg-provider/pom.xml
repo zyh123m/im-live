@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.example</groupId>
+        <groupId>com.example</groupId>
         <artifactId>im-live-msg</artifactId>
         <version>${revision}</version>
     </parent>
@@ -20,7 +20,7 @@
     <dependencies>
         <!-- SpringCloud Alibaba Nacos -->
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>com.example</groupId>
             <artifactId>im-live-nacos-starter</artifactId>
         </dependency>
 
@@ -46,17 +46,17 @@
         </dependency>
 
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>com.example</groupId>
             <artifactId>im-live-msg-interface</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>com.example</groupId>
             <artifactId>im-live-user-interface</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>com.example</groupId>
             <artifactId>im-live-common</artifactId>
         </dependency>
     </dependencies>
@@ -70,7 +70,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.example.msg.ImLiveMsgApplication</mainClass>
+                    <mainClass>com.example.generator.ImLiveIdGeneratorApplication</mainClass>
                     <skip>true</skip>
                 </configuration>
                 <executions>

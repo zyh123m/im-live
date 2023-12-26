@@ -1,2 +1,2 @@
-org.example.common.MinioConfig
-org.example.common.MinioUtils
+com.example.common.MinioConfig
+com.example.common.MinioUtils
