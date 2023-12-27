@@ -112,11 +112,7 @@
                 <version>${revision}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.example</groupId>
-                <artifactId>im-live-auth-interface</artifactId>
-                <version>${revision}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.example</groupId>
                 <artifactId>im-live-nacos-starter</artifactId>
