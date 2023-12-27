@@ -5,7 +5,6 @@ dataSources:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     dataSourceClassName: com.alibaba.druid.pool.DruidDataSource
-
     type: com.alibaba.druid.pool.DruidDataSource
 #  user_slave0:
 #    url: jdbc:mysql://mysql-slave.im-live:3306/user?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai

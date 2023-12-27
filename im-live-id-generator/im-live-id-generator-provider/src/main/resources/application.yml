@@ -1,12 +1,12 @@
 server:
-  port: 9999
+  port: 7777
   servlet:
-    context-path: /msg-api
+    context-path: /generator-api
 spring:
   main:
     banner-mode: off
   application:
-    name: im-live-msg
+    name: im-live-id-generator
   profiles:
     # 环境配置
     active: @profiles.active@
@@ -38,4 +38,4 @@ dubbo:
     address: nacos://@nacos.server@?namespace=dev
   protocol:
     name: tri
-    port: 19999
+    port: 17777

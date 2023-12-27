@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.generator.mapper.IdGenerateMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.generator.entity.IdGenerate">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="nextThreshold" column="next_threshold" jdbcType="BIGINT"/>
+            <result property="initNum" column="init_num" jdbcType="BIGINT"/>
+            <result property="currentStart" column="current_start" jdbcType="BIGINT"/>
+            <result property="step" column="step" jdbcType="INTEGER"/>
+            <result property="isSeg" column="is_seg" jdbcType="TINYINT"/>
+            <result property="idPrefix" column="id_prefix" jdbcType="VARCHAR"/>
+            <result property="version" column="version" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,remark,next_threshold,
+        init_num,current_start,step,
+        is_seg,id_prefix,version,
+        create_time,update_time
+    </sql>
+</mapper>
