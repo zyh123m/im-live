@@ -28,3 +28,6 @@ logging:
   level:
     com.com.example.auth: debug
     org.springframework.security: trace
+mybatis-plus:
+  global-config:
+    banner: off

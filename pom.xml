@@ -43,6 +43,7 @@
         <sharding-jdbc.version>5.3.2</sharding-jdbc.version>
         <spring.security.cas.version>6.1.4</spring.security.cas.version>
         <minio.version>8.5.2</minio.version>
+        <rocketmq-starter.version>2.2.3</rocketmq-starter.version>
 
     </properties>
 
@@ -175,6 +176,13 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq-starter.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
