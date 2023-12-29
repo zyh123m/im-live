@@ -1,4 +1,4 @@
-package com.example.im.common;
+package com.example.im.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ public enum ImMsgCodeEnum {
     IM_HEARTBEAT_MSG(1004,"服务器心跳消息包");
 
     private int code;
-    private String des;
+    private String desc;
 
     public int getCode() {
         return code;
@@ -22,11 +22,11 @@ public enum ImMsgCodeEnum {
         this.code = code;
     }
 
-    public String getDes() {
-        return des;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDes(String des) {
-        this.des = des;
+    public void setDes(String desc) {
+        this.desc = desc;
     }
 }

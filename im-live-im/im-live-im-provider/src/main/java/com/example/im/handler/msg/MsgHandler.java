@@ -1,6 +1,6 @@
 package com.example.im.handler.msg;
 
-import com.example.im.common.ImMsg;
+import com.example.im.entity.ImMsg;
 import io.netty.channel.ChannelHandlerContext;
 
 public interface MsgHandler {

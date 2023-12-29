@@ -1,6 +1,6 @@
 package com.example.im.handler;
 
-import com.example.im.common.ImMsg;
+import com.example.im.entity.ImMsg;
 import com.example.im.handler.msg.ImMsgHandlerFactory;
 import com.example.im.handler.msg.impl.ImMsgHandlerFactoryImpl;
 import io.netty.channel.ChannelHandlerContext;
