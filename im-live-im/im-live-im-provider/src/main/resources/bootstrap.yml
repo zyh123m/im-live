@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.com.example.im: debug

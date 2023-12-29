@@ -17,6 +17,7 @@
         <module>im-live-api</module>
         <module>im-live-gateway</module>
         <module>im-live-id-generator</module>
+        <module>im-live-im</module>
     </modules>
 
     <properties>
@@ -44,6 +45,7 @@
         <spring.security.cas.version>6.1.4</spring.security.cas.version>
         <minio.version>8.5.2</minio.version>
         <rocketmq-starter.version>2.2.3</rocketmq-starter.version>
+        <netty.version>4.1.35.Final</netty.version>
 
     </properties>
 
@@ -51,6 +53,13 @@
 
     <dependencyManagement>
         <dependencies>
+
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
 
 
             <dependency>
@@ -94,6 +103,12 @@
                 <artifactId>spring-cloud-starter-gateway</artifactId>
                 <version>4.0.4</version>
 
+            </dependency>
+
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>im-live-im-interface</artifactId>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.example</groupId>
