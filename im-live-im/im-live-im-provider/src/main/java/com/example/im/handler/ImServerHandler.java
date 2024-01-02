@@ -16,8 +16,8 @@ public class ImServerHandler  extends SimpleChannelInboundHandler{
             throw new IllegalArgumentException("error message,message is {}"+o);
         }
         ImMsg msg = (ImMsg) o;
-
         handlerFactory.handler(channelHandlerContext,msg);
-
     }
+
+
 }
