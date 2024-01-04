@@ -59,6 +59,11 @@
             <groupId>com.example</groupId>
             <artifactId>im-live-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>im-live-mq-starter</artifactId>
+        </dependency>
     </dependencies>
 
 

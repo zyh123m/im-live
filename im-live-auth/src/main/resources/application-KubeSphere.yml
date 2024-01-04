@@ -12,7 +12,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   data:
     redis:
-      host: redis-dns.im-live
+      host: redis.im-live
       port: 6379
       database: 0
       #    password: 123456 #默认为空

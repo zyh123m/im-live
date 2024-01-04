@@ -3,6 +3,7 @@ package com.example.auth.authorization.config;
 
 import com.example.auth.constant.RedisConstants;
 import com.example.auth.constant.SecurityConstants;
+import com.example.auth.service.impl.ImLiveOAuth2AuthorizationConsentService;
 import com.example.auth.token.FederatedIdentityIdTokenCustomizer;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -83,23 +84,19 @@ public class AuthorizationBasicBeanConfig {
      * @param registeredClientRepository 上边注入的客户端repository
      * @return JdbcOAuth2AuthorizationService
      */
-    @Bean
-    public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        // 基于db的oauth2认证服务，还有一个基于内存的服务InMemoryOAuth2AuthorizationService
-        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
-    }
+//    @Bean
+//    public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+//        // 基于db的oauth2认证服务，还有一个基于内存的服务InMemoryOAuth2AuthorizationService
+//        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
+//    }
+
 
     /**
-     * 配置基于db的授权确认管理服务
-     *
-     * @param jdbcTemplate               db数据源信息
-     * @param registeredClientRepository 客户端repository
-     * @return JdbcOAuth2AuthorizationConsentService
+     * 基于redis实现的授权确认管理服务
      */
     @Bean
-    public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        // 基于db的授权确认管理服务，还有一个基于内存的服务实现InMemoryOAuth2AuthorizationConsentService
-        return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
+    public OAuth2AuthorizationConsentService auth2AuthorizationConsentService(){
+            return new ImLiveOAuth2AuthorizationConsentService();
     }
 
     /**

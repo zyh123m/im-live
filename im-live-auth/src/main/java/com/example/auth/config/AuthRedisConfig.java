@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisKeyValueAdapter;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -21,7 +23,8 @@ import org.springframework.security.jackson2.CoreJackson2Module;
  */
 @Configuration
 @RequiredArgsConstructor
-public class RedisConfig {
+@EnableRedisRepositories(enableKeyspaceEvents = RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
+public class AuthRedisConfig {
 
     private final Jackson2ObjectMapperBuilder builder;
 
@@ -73,18 +76,6 @@ public class RedisConfig {
         redisTemplate.setConnectionFactory(connectionFactory);
 
         return redisTemplate;
-    }
-
-    /**
-     * 操作hash的情况下使用
-     *
-     * @param connectionFactory redis链接工厂
-     * @return RedisTemplate
-     */
-    @Bean
-    public RedisTemplate<Object, Object> redisHashTemplate(RedisConnectionFactory connectionFactory) {
-
-        return redisTemplate(connectionFactory);
     }
 
 }

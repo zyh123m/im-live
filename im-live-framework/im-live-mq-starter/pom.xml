@@ -5,17 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>im-live</artifactId>
+        <artifactId>im-live-framework</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>im-live-framework</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>im-live-redis-starter</module>
-        <module>im-live-oss-starter</module>
-        <module>im-live-nacos-starter</module>
-        <module>im-live-mq-starter</module>
-    </modules>
+    <artifactId>im-live-mq-starter</artifactId>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

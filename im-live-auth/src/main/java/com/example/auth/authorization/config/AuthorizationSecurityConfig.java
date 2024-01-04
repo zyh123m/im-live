@@ -74,7 +74,9 @@ public class AuthorizationSecurityConfig {
                                 )))
                         .accessTokenResponseHandler(new ImLiveAuthorizationSuccessHandler()) // 自定义成功响应
                         .errorResponseHandler(new ImLiveAuthorizationFailureHandler())
-                );
+                )
+
+        ;
 
         basicConfig(http);
 
