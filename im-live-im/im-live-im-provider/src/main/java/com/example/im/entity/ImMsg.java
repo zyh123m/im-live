@@ -20,7 +20,7 @@ public class ImMsg implements Serializable {
     //消息体长度
     private int length;
     //消息体
-    private byte[] body;
+    private Object body;
 
     public ImMsg(int code, byte[] body) {
         this.code = code;
@@ -53,11 +53,12 @@ public class ImMsg implements Serializable {
         this.length = length;
     }
 
-    public byte[] getBody() {
+
+    public Object getBody() {
         return body;
     }
 
-    public void setBody(byte[] body) {
+    public void setBody(Object body) {
         this.body = body;
     }
 
@@ -67,7 +68,7 @@ public class ImMsg implements Serializable {
                 "magic=" + magic +
                 ", code=" + code +
                 ", length=" + length +
-                ", body=" + new String(body) +
+                ", body=" + body +
                 '}';
     }
 }

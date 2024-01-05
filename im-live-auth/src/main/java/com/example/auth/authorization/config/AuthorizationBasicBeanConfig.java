@@ -63,7 +63,6 @@ public class AuthorizationBasicBeanConfig {
 
     /**
      * 配置密码解析器，使用BCrypt的方式对密码进行加密和验证
-     *
      * @return BCryptPasswordEncoder
      */
 
@@ -76,19 +75,6 @@ public class AuthorizationBasicBeanConfig {
         return encoder;
     }
 
-
-    /**
-     * 配置基于db的oauth2的授权管理服务
-     *
-     * @param jdbcTemplate               db数据源信息
-     * @param registeredClientRepository 上边注入的客户端repository
-     * @return JdbcOAuth2AuthorizationService
-     */
-//    @Bean
-//    public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-//        // 基于db的oauth2认证服务，还有一个基于内存的服务InMemoryOAuth2AuthorizationService
-//        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
-//    }
 
 
     /**

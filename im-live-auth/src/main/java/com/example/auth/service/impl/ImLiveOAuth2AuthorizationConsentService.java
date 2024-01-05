@@ -25,7 +25,6 @@ public class ImLiveOAuth2AuthorizationConsentService implements OAuth2Authorizat
     public void save(OAuth2AuthorizationConsent authorizationConsent) {
         Assert.notNull(authorizationConsent, "authorizationConsent cannot be null");
         int key = getId(authorizationConsent);
-
         RedisAuthorizationConsent redisAuthorizationConsent = new RedisAuthorizationConsent(authorizationConsent);
         redisTemplate.opsForValue().set(RedisConstants.CONSENT_KEY+RedisConstants.FOLDER_SEPARATOR+authorizationConsent.getRegisteredClientId()+RedisConstants.FOLDER_SEPARATOR+authorizationConsent.getPrincipalName()+"-"+key,redisAuthorizationConsent);
     }

@@ -34,6 +34,7 @@ public class ImClientApplication {
 
             Channel channel = channelFuture.channel();
             for (int i = 1; i < 201; i++) {
+                System.out.println(new ImMsg(ImMsgCodeEnum.IM_BIZ_MSG.getCode(), ImMsgCodeEnum.IM_BIZ_MSG.getDesc().getBytes()));
                 channel.writeAndFlush(new ImMsg(ImMsgCodeEnum.IM_BIZ_MSG.getCode(), ImMsgCodeEnum.IM_BIZ_MSG.getDesc().getBytes()));
                 channel.writeAndFlush(new ImMsg(ImMsgCodeEnum.IM_HEARTBEAT_MSG.getCode(), ImMsgCodeEnum.IM_HEARTBEAT_MSG.getDesc().getBytes()));
                 channel.writeAndFlush(new ImMsg(ImMsgCodeEnum.IM_LOGOUT_MSG.getCode(), ImMsgCodeEnum.IM_LOGOUT_MSG.getDesc().getBytes()));

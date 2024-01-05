@@ -23,6 +23,16 @@
 
         <dependency>
             <groupId>com.example</groupId>
+            <artifactId>im-live-redis-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
             <artifactId>im-live-nacos-starter</artifactId>
             <exclusions>
                 <exclusion>
@@ -33,10 +43,7 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+
 
         <!-- 引入分布式session -->
         <dependency>

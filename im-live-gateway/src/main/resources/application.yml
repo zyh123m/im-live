@@ -1,5 +1,9 @@
 server:
   port: 8080
+  servlet:
+    session:
+      cookie:
+        domain: im.com
 spring:
   mvc:
     static-path-pattern: /**
@@ -12,8 +16,6 @@ spring:
   profiles:
     # 环境配置
     active: @profiles.active@
-
-
   cloud:
     compatibility-verifier:
       enabled: false

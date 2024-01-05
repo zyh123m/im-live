@@ -5,6 +5,8 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * 护理消息的编码过程
  */
@@ -15,7 +17,7 @@ public class ImMsgEncoder extends MessageToByteEncoder {
         byteBuf.writeShort(msg.getMagic());
         byteBuf.writeInt(msg.getCode());
         byteBuf.writeInt(msg.getLength());
-        byteBuf.writeBytes(msg.getBody());
+        byteBuf.writeBytes(msg.getBody().toString().getBytes(StandardCharsets.UTF_8));
 
 
     }
