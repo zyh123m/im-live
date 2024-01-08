@@ -8,8 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDubbo
-@SpringBootApplication
-@EnableDiscoveryClient
+@SpringBootApplication(scanBasePackages = {"com.example.**"})
 @EnableCaching
 @MapperScan(value = {"com.example.**.mapper*"})
 public class ImLiveUserApplication {

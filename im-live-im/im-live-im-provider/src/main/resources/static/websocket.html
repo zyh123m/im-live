@@ -45,7 +45,7 @@
              chat: function() {
                 var msg = document.getElementById("msgContent");
                 let temp = msg.value
-                var ss={magic:'123',code:1003,body:JSON.stringify(temp),length:msg.value.length}
+                var ss={magic:'123',code:1003,body:temp,length:msg.value.length}
                 CHAT.socket.send(JSON.stringify(ss));
              }
           }

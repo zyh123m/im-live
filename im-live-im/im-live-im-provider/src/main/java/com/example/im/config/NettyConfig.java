@@ -1,7 +1,5 @@
 package com.example.im.config;
 
-import com.example.im.common.ImMsgDecoder;
-import com.example.im.common.ImMsgEncoder;
 import com.example.im.handler.ImServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -16,12 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+
 @Slf4j
 @Configuration
 public class NettyConfig implements InitializingBean {
 
     @Value("${netty.port}")
     private int port;
+
     @Override
     public void afterPropertiesSet() throws Exception {
         startApplication();
@@ -44,7 +44,8 @@ public class NettyConfig implements InitializingBean {
                     protected void initChannel(SocketChannel channel) throws Exception {
 
                         log.info("初始化连接渠道");
-
+                       // channel.pipeline().addLast(new IdleStateHandler(30, 0, 0, TimeUnit.SECONDS));
+                       // channel.pipeline().addLast("logging", new LoggingHandler("DEBUG"));// 设置log监听器，并且日志级别为debug，方便观察运行流程
 
                         //设计消息体
                         //编解码器
@@ -69,11 +70,6 @@ public class NettyConfig implements InitializingBean {
                          */
                         channel.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
 
-
-                        //channel.pipeline().addLast(new ImMsgDecoder());
-                        //channel.pipeline().addLast(new ImMsgEncoder());
-
-                        //handler
                         channel.pipeline().addLast(new ImServerHandler());
 
                     }

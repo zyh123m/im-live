@@ -18,7 +18,7 @@ spring:
 # rocketmq配置
 rocketmq:
   #rocketmq服务地址集群由`;`分开
-  name-server: http://192.168.101.141:9876;http://192.168.101.142:9876;http://192.168.101.143:9876
+  name-server: http://43.240.220.48:9876
   #自定义的组名称
   producer:
     group: im_live_group
