@@ -12,6 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 这种内存存储很有问题
+ */
 @Slf4j
 public class UserChannelCache {
 
@@ -81,6 +84,11 @@ public class UserChannelCache {
         }
 
     }
+
+    /**
+     * 这种会占内存 极有可能OOM
+     * @param object 消息体
+     */
     public static void  writeAllAndFlush(Object object)  {
         ChannelGroup channelGroup = new DefaultChannelGroup(ImmediateEventExecutor.INSTANCE);
         cacheMap.forEach((k,v)->channelGroup.addAll(v));
