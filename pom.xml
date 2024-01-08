@@ -18,6 +18,7 @@
         <module>im-live-gateway</module>
         <module>im-live-id-generator</module>
         <module>im-live-im</module>
+        <module>im-live-pay</module>
     </modules>
 
     <properties>
@@ -48,6 +49,8 @@
         <rocketmq-starter.version>2.2.3</rocketmq-starter.version>
         <netty.version>4.1.35.Final</netty.version>
         <redisson.version>3.22.1</redisson.version>
+        <alipay.version>4.22.110.ALL</alipay.version>
+
     </properties>
 
 
@@ -55,7 +58,11 @@
     <dependencyManagement>
         <dependencies>
 
-
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>${alipay.version}</version>
+            </dependency>
 
 
             <dependency>
@@ -99,6 +106,11 @@
                 <artifactId>spring-cloud-starter-gateway</artifactId>
                 <version>4.0.4</version>
 
+            </dependency>
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>im-live-pay-interface</artifactId>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
