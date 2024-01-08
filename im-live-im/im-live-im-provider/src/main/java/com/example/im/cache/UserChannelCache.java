@@ -21,6 +21,11 @@ public class UserChannelCache {
 
 
 
+    //TODO 这种方式无法满足分布式集群的功能
+    // 如果通过分布式集群的方式负载均衡访问，
+    // 如果能通过固定算法将指定的用户绑定到具体的server的话就可以但是如果需要广播功能的话就不行了
+    // 这里只存储了部分用户的channel并不是全部的
+    // 暂时想了一个方案 通过nacos获取集群中的服务 并轮询分发
     public static ConcurrentHashMap<String,ChannelGroup> cacheMap = new ConcurrentHashMap<>();
 
 
