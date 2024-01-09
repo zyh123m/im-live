@@ -5,18 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>im-live</artifactId>
+        <artifactId>im-live-rpc</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>im-live-framework</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>im-live-redis-starter</module>
-        <module>im-live-oss-starter</module>
-        <module>im-live-nacos-starter</module>
-        <module>im-live-mq-starter</module>
-        <module>im-live-common</module>
-    </modules>
+    <artifactId>im-live-id-generator-rpc</artifactId>
+
 
 </project>

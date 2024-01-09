@@ -11,7 +11,6 @@
     <modules>
         <module>im-live-user</module>
         <module>im-live-msg</module>
-        <module>im-live-common</module>
         <module>im-live-auth</module>
         <module>im-live-framework</module>
         <module>im-live-api</module>
@@ -19,6 +18,7 @@
         <module>im-live-id-generator</module>
         <module>im-live-im</module>
         <module>im-live-pay</module>
+        <module>im-live-rpc</module>
     </modules>
 
     <properties>
@@ -109,30 +109,30 @@
             </dependency>
             <dependency>
                 <groupId>com.example</groupId>
-                <artifactId>im-live-pay-interface</artifactId>
+                <artifactId>im-live-pay-rpc</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.example</groupId>
-                <artifactId>im-live-im-interface</artifactId>
+                <artifactId>im-live-im-rpc</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.example</groupId>
-                <artifactId>im-live-id-generator-interface</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.example</groupId>
-                <artifactId>im-live-user-interface</artifactId>
+                <artifactId>im-live-id-generator-rpc</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.example</groupId>
-                <artifactId>im-live-msg-interface</artifactId>
+                <artifactId>im-live-user-rpc</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>im-live-msg-rpc</artifactId>
                 <version>${revision}</version>
             </dependency>
 

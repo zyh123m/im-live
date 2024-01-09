@@ -59,7 +59,7 @@
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>im-live-user-interface</artifactId>
+            <artifactId>im-live-user-rpc</artifactId>
         </dependency>
     </dependencies>
 

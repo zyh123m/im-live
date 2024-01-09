@@ -5,18 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>im-live</artifactId>
+        <artifactId>im-live-framework</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>im-live-framework</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>im-live-redis-starter</module>
-        <module>im-live-oss-starter</module>
-        <module>im-live-nacos-starter</module>
-        <module>im-live-mq-starter</module>
-        <module>im-live-common</module>
-    </modules>
+    <artifactId>im-live-common</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+    </dependencies>
+
 
 </project>
