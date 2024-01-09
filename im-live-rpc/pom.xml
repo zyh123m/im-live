@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>im-live</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>im-live-rpc</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>im-live-im-rpc</module>
+        <module>im-live-user-rpc</module>
+        <module>im-live-msg-rpc</module>
+        <module>im-live-id-generator-rpc</module>
+        <module>im-live-pay-rpc</module>
+    </modules>
+</project>

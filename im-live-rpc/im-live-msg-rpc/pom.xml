@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>im-live-id-generator</artifactId>
-        <version>${revision}</version>
+        <artifactId>im-live-rpc</artifactId>
+        <version>1.0</version>
     </parent>
 
-    <artifactId>im-live-id-generator-interface</artifactId>
+    <artifactId>im-live-msg-rpc</artifactId>
 
 
 </project>
