@@ -39,7 +39,7 @@ rules:
       user-inline:
         type: INLINE
         props:
-          algorithm-expression: user_${(username.hashCode()% 10)}
+          algorithm-expression: user_${(Math.abs(username.hashCode())% 10)}
 props:
   sql-show: true
   max-connections-size-per-query: 3

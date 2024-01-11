@@ -17,6 +17,7 @@
         <module>im-live-nacos-starter</module>
         <module>im-live-mq-starter</module>
         <module>im-live-common</module>
+        <module>im-live-mybatis</module>
     </modules>
 
 </project>

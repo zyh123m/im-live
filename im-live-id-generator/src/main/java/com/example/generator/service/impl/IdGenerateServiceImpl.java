@@ -105,20 +105,15 @@ public class IdGenerateServiceImpl extends ServiceImpl<IdGenerateMapper, IdGener
             if (acquireStatus) {
                 LOGGER.info("开始尝试进行本地id段的同步操作");
                 //异步进行同步id段操作
-                threadPoolExecutor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            IdGenerate idGeneratePO = idGenerateMapper.selectById(localSeqIdBO.getId());
-                            tryUpdateMySQLRecord(idGeneratePO);
-                        } catch (Exception e) {
-                            LOGGER.error("[refreshLocalSeqId] error is ", e);
-                        } finally {
-                            semaphoreMap.get(localSeqIdBO.getId()).release();
-                            LOGGER.info("本地有序id段同步完成,id is {}", localSeqIdBO.getId());
-                        }
-                    }
-                });
+                try {
+                    IdGenerate idGeneratePO = idGenerateMapper.selectById(localSeqIdBO.getId());
+                    tryUpdateMySQLRecord(idGeneratePO);
+                } catch (Exception e) {
+                    LOGGER.error("[refreshLocalSeqId] error is ", e);
+                } finally {
+                    semaphoreMap.get(localSeqIdBO.getId()).release();
+                    LOGGER.info("本地有序id段同步完成,id is {}", localSeqIdBO.getId());
+                }
             }
         }
     }
