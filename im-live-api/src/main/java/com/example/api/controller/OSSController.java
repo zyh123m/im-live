@@ -37,7 +37,8 @@ public class OSSController {
             String contentType = file.getContentType();
             minioUtils.uploadFile(minioConfig.getBucketName(), file, fileName, contentType);
             String url = minioUtils.getPresignedObjectUrl(minioConfig.getBucketName(), fileName);
-            return Result.OK(url);
+            String[] split = url.split("\\?");
+            return Result.OK(split[0]);
         } catch (Exception e) {
             log.error("上传失败");
             return Result.error("上传失败");

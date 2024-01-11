@@ -1,6 +1,7 @@
 package com.example.im.config;
 
 import com.example.im.handler.ImServerHandler;
+import com.example.im.handler.auth.AuthHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -62,13 +63,14 @@ public class NettyConfig implements InitializingBean {
 
                         // =========== 以上是用于支持http协议 =========== //
 
+                        //channel.pipeline().addLast(new AuthHandler());
                         /*
                          * websocket服务器处理的协议，用于指定给客户端连接访问的路由：/ws
                          * 本handler会帮你处理一些繁重的复杂的事
                          * 会帮你处理握手动作：handshaking（close，ping，pong）ping + pong = 心跳
                          * 对于websocket来讲，都是以frames进行传输的，不同的数据类型对应的frames也不同。
                          */
-                        channel.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
+                        channel.pipeline().addLast(new WebSocketServerProtocolHandler("/ws",true));
 
                         channel.pipeline().addLast(new ImServerHandler());
 

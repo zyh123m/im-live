@@ -56,6 +56,11 @@
             <groupId>com.example</groupId>
             <artifactId>im-live-msg-rpc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>im-live-common</artifactId>
+        </dependency>
     </dependencies>
 
 
