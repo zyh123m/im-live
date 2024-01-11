@@ -30,7 +30,7 @@ rules:
   - !SHARDING
     tables:
       user:
-        actualDataNodes: user_ds.user_${(0..99).collect(){it.toString()}}
+        actualDataNodes: user_ds.user_${(0..9).collect(){it.toString()}}
         tableStrategy:
           standard:
             shardingColumn: username
@@ -39,7 +39,7 @@ rules:
       user-inline:
         type: INLINE
         props:
-          algorithm-expression: user_${(username.hashCode()% 100)}
+          algorithm-expression: user_${(username.hashCode()% 10)}
 props:
   sql-show: true
   max-connections-size-per-query: 3
