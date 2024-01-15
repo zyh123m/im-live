@@ -4,7 +4,7 @@ spring:
     url: jdbc:shardingsphere:classpath:sharding.yaml
   data:
     redis:
-      host: redis.im-live
+      host: @redis.host@
       port: 6379
       database: 0
       #    password: 123456 #默认为空

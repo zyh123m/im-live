@@ -24,4 +24,5 @@ public interface IdGenerateService extends IService<IdGenerate> {
      * @return
      */
     Long getUnSeqId(Integer id);
+
 }

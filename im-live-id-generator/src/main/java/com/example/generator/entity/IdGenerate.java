@@ -6,7 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -14,6 +18,9 @@ import lombok.Data;
  */
 @TableName(value ="t_id_generate_config")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class IdGenerate implements Serializable {
     /**
      * 主键id

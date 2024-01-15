@@ -61,7 +61,7 @@
 
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>im-live-mybatis</artifactId>
+            <artifactId>im-live-mybatis-starter</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.dubbo</groupId>

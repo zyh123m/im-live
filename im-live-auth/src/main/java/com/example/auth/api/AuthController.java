@@ -17,6 +17,4 @@ public class AuthController {
     public Result hello(){
         return Result.OK("test success");
     }
-
-
 }

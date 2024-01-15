@@ -12,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -49,6 +46,7 @@ public class IdGenerateServiceImpl extends ServiceImpl<IdGenerateMapper, IdGener
 
     @Override
     public Long getUnSeqId(Integer id) {
+
         if (id == null) {
             LOGGER.error("[getSeqId] id is error,id is {}", id);
             return null;
@@ -76,7 +74,8 @@ public class IdGenerateServiceImpl extends ServiceImpl<IdGenerateMapper, IdGener
         LocalSeqIdBO localSeqIdBO = localSeqIdBOMap.get(id);
         if (localSeqIdBO == null) {
             LOGGER.error("[getSeqId] localSeqIdBO is null,id is {}", id);
-            return null;
+            initialize(id);
+            //return null;
         }
         this.refreshLocalSeqId(localSeqIdBO);
         long returnId = localSeqIdBO.getCurrentNum().incrementAndGet();
@@ -224,6 +223,24 @@ public class IdGenerateServiceImpl extends ServiceImpl<IdGenerateMapper, IdGener
             localUnSeqIdBO.setIdQueue(idQueue);
             localUnSeqIdBOMap.put(localUnSeqIdBO.getId(), localUnSeqIdBO);
         }
+    }
+
+    public void initialize(Integer id){
+        IdGenerate generate = IdGenerate.builder()
+                .id(id)
+                .initNum(10000L)
+                .currentStart(10000L)
+                .isSeq(1)
+                .step(50)
+                .nextThreshold(10100L)
+                .createTime(new Date())
+                .remark(id.getClass().toString())
+                .version(1)
+                .build();
+        semaphoreMap.put(generate.getId(), new Semaphore(1));
+        localIdBOHandler(generate);
+        this.save(generate);
+
     }
 
 }
