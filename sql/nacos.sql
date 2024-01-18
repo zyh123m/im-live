@@ -14,7 +14,7 @@
  Date: 15/01/2024 16:00:40
 */
 
-SET NAMES utf8mb4;
+SET NAMES utf8mb3;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -323,11 +323,11 @@ INSERT INTO `his_config_info` VALUES (47, 171, 'org.example.user.service.UserRpc
 -- ----------------------------
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions`  (
-  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `resource` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `action` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `role` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `resource` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `action` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   UNIQUE INDEX `uk_role_permission`(`role`, `resource`, `action`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of permissions
@@ -338,10 +338,10 @@ CREATE TABLE `permissions`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles`  (
-  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `role` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   UNIQUE INDEX `idx_user_role`(`username`, `role`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of roles
@@ -399,11 +399,11 @@ INSERT INTO `tenant_info` VALUES (2, '1', 'dev', 'dev', 'dev', 'nacos', 17011506
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
-  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `password` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
