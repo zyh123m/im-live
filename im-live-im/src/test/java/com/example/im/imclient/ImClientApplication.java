@@ -2,8 +2,7 @@ package com.example.im.imclient;
 
 import com.example.im.entity.ImMsg;
 import com.example.im.constant.ImMsgCodeEnum;
-import com.example.im.common.ImMsgDecoder;
-import com.example.im.common.ImMsgEncoder;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -20,8 +19,7 @@ public class ImClientApplication {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast(new ImMsgDecoder());
-                        pipeline.addLast(new ImMsgEncoder());
+
                         //pipeline.addLast(new ObjectEncoder());
 
                         pipeline.addLast(new ImClientHandler());
