@@ -1,0 +1,32 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: mysql-slave
+  namespace: im-live
+  labels:
+    app: mysql-slave
+    version: v1
+  annotations:
+    kubesphere.io/creator: dev-tom
+    kubesphere.io/serviceType: statelessservice
+spec:
+  ports:
+    - name: tcp-3306
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+    - name: tcp-33060
+      protocol: TCP
+      port: 33060
+      targetPort: 33060
+  selector:
+    app: mysql-slave
+  clusterIP: 10.233.41.72
+  clusterIPs:
+    - 10.233.41.72
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

@@ -1,0 +1,48 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: mysql
+  namespace: im-live
+  labels:
+    app: mysql
+    eip.openelb.kubesphere.io/v1alpha2: layer2-eip
+    version: v1
+  annotations:
+    eip.openelb.kubesphere.io/v1alpha2: layer2-eip
+    kubesphere.io/creator: dev-tom
+    kubesphere.io/serviceType: statelessservice
+    layer2.openelb.kubesphere.io/v1alpha1: localhost.localdomain.cluster.local
+    lb.kubesphere.io/v1alpha1: openelb
+    protocol.openelb.kubesphere.io/v1alpha1: layer2
+  finalizers:
+    - finalizer.lb.kubesphere.io/v1alpha1
+spec:
+  ports:
+    - name: tcp-3306
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+      nodePort: 31366
+    - name: tcp-33060
+      protocol: TCP
+      port: 33060
+      targetPort: 33060
+      nodePort: 30607
+    - name: tcp-slave-3306
+      protocol: TCP
+      port: 13306
+      targetPort: 13306
+      nodePort: 31718
+  selector:
+    app: mysql
+  clusterIP: 10.233.23.184
+  clusterIPs:
+    - 10.233.23.184
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster

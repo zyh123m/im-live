@@ -16,7 +16,7 @@ public class ImLiveIdGenerator implements IdentifierGenerator {
     public Number nextId(Object entity) {
         String bizKey = entity.getClass().getName();
 
-        Long seqId = generatorRpc.getSeqId(bizKey.hashCode()%300);
+        Long seqId = generatorRpc.getSeqId(Math.abs(bizKey.hashCode())%300);
         return seqId;
     }
 }

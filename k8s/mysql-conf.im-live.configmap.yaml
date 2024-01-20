@@ -1,0 +1,38 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mysql-conf
+  namespace: im-live
+  annotations:
+    kubesphere.io/creator: dev-zhang
+data:
+  master.cnf: |-
+
+    [mysqld]
+    server-id=1  
+    log-bin=mysql-bin
+    skip-host-cache
+    skip-name-resolve
+    datadir=/var/lib/mysql
+    socket=/var/run/mysqld/mysqld.sock
+    secure-file-priv=/var/lib/mysql-files
+    user=mysql
+    lower_case_table_names=1
+    pid-file=/var/run/mysqld/mysqld.pid
+    [client]
+    socket=/var/run/mysqld/mysqld.sock
+  slave.cnf: |-
+
+    [mysqld]
+    server-id=2 
+    log-bin=mysql-bin
+    skip-host-cache
+    skip-name-resolve
+    datadir=/var/lib/mysql
+    socket=/var/run/mysqld/mysqld.sock
+    secure-file-priv=/var/lib/mysql-files
+    user=mysql
+    lower_case_table_names=1
+    pid-file=/var/run/mysqld/mysqld.pid
+    [client]
+    socket=/var/run/mysqld/mysqld.sock

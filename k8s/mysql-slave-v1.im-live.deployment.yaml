@@ -1,0 +1,84 @@
+﻿kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mysql-slave
+  namespace: im-live
+  labels:
+    app: mysql-slave
+    version: v1
+  annotations:
+    deployment.kubernetes.io/revision: '13'
+    kubesphere.io/creator: dev-tom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-slave
+      version: v1
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mysql-slave
+        version: v1
+      annotations:
+        kubesphere.io/creator: dev-tom
+        kubesphere.io/imagepullsecrets: '{}'
+        kubesphere.io/restartedAt: '2023-11-27T09:15:48.513Z'
+        logging.kubesphere.io/logsidecar-config: '{}'
+    spec:
+      volumes:
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+            type: ''
+        - name: volume-r6nzvk
+          configMap:
+            name: mysql-conf
+            items:
+              - key: slave.cnf
+                path: my.cnf
+            defaultMode: 420
+        - name: volume-8zl0oq
+          persistentVolumeClaim:
+            claimName: mysql-slave
+      containers:
+        - name: container-bgtf03
+          image: 'mysql:8.2'
+          ports:
+            - name: tcp-3306
+              containerPort: 3306
+              protocol: TCP
+            - name: tcp-33060
+              containerPort: 33060
+              protocol: TCP
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          resources: {}
+          volumeMounts:
+            - name: host-time
+              readOnly: true
+              mountPath: /etc/localtime
+            - name: volume-r6nzvk
+              readOnly: true
+              mountPath: /etc/mysql/conf.d
+            - name: volume-8zl0oq
+              mountPath: /var/lib/mysql
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

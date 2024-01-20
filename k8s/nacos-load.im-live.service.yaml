@@ -1,0 +1,47 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: nacos-load
+  namespace: im-live
+  labels:
+    app: nacos-load
+    eip.openelb.kubesphere.io/v1alpha2: layer2-eip
+  annotations:
+    eip.openelb.kubesphere.io/v1alpha2: layer2-eip
+    kubesphere.io/creator: admin
+    layer2.openelb.kubesphere.io/v1alpha1: localhost.localdomain.cluster.local
+    lb.kubesphere.io/v1alpha1: openelb
+    protocol.openelb.kubesphere.io/v1alpha1: layer2
+  finalizers:
+    - finalizer.lb.kubesphere.io/v1alpha1
+spec:
+  ports:
+    - name: http-8848
+      protocol: TCP
+      port: 8848
+      targetPort: 8848
+      nodePort: 31159
+    - name: http-9848
+      protocol: TCP
+      port: 9848
+      targetPort: 9848
+      nodePort: 31737
+    - name: http-9849
+      protocol: TCP
+      port: 9849
+      targetPort: 9849
+      nodePort: 30653
+  selector:
+    app: nacos
+    version: v1
+  clusterIP: 10.233.16.247
+  clusterIPs:
+    - 10.233.16.247
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster
