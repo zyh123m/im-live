@@ -279,7 +279,10 @@
                 <redis.host>redis.im-live</redis.host>
 
             </properties>
-
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
 
         <profile>
