@@ -10,6 +10,6 @@ WORKDIR /work
 
 EXPOSE 8080
 EXPOSE 18080
-ADD ./im-live-gateway-1.0.jar ./
+ADD ./target/im-live-gateway-1.0.jar ./
 
 CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar im-live-gateway-1.0.jar

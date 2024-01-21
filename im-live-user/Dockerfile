@@ -10,6 +10,6 @@ WORKDIR /work
 
 EXPOSE 8880
 EXPOSE 18880
-ADD ./im-live-user-1.0.jar ./
+ADD ./target/im-live-user-1.0.jar ./
 
 CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar im-live-user-1.0.jar
