@@ -284,7 +284,10 @@
                 <redis.host>redis.im-live</redis.host>
 
             </properties>
-
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
 
         <profile>
@@ -312,10 +315,7 @@
                 <mysql.host>192.168.101.141</mysql.host>
                 <redis.host>192.168.101.143</redis.host>
             </properties>
-            <activation>
-                <!-- 默认环境 -->
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
         </profile>
 
     </profiles>
