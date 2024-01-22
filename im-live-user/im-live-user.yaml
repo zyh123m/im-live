@@ -1,0 +1,65 @@
+﻿kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: im-live-user-latest
+  namespace: im-live
+  labels:
+    app: im-live-user
+    version: latest
+  annotations:
+    kubesphere.io/creator: dev-zhang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: im-live-user
+      version: latest
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: im-live-user
+        version: latest
+      annotations:
+        kubesphere.io/creator: dev-zhang
+        kubesphere.io/imagepullsecrets: '{"container-qvfgfi":"harbor"}'
+    spec:
+      volumes:
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+            type: ''
+      containers:
+        - name: container-qvfgfi
+          image: '43.240.220.48:81/im-live/im-live-user:latest'
+          ports:
+            - name: tcp-18880
+              containerPort: 18880
+              protocol: TCP
+            - name: tcp-8880
+              containerPort: 8880
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: host-time
+              readOnly: true
+              mountPath: /etc/localtime
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      imagePullSecrets:
+        - name: harbor
+      schedulerName: default-scheduler
+  serviceName: im-live-user
+  podManagementPolicy: OrderedReady
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  revisionHistoryLimit: 10
