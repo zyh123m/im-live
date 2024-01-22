@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>im-live-pay</artifactId>
     <version>${revision}</version>
-    <name>im-live-pay-provider</name>
+    <name>im-live-pay</name>
     <description>支付服务</description>
 
     <dependencies>

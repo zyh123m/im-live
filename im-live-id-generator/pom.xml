@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>im-live-id-generator</artifactId>
+    <artifactId>im-live-id</artifactId>
     <version>${revision}</version>
     <name>im-live-id-generator-provider</name>
 

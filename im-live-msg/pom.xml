@@ -15,7 +15,7 @@
     <name>im-live-msg-provider</name>
 
 
-    <description>im-live-msg-provider</description>
+    <description>im-live-msg</description>
 
     <dependencies>
         <!-- SpringCloud Alibaba Nacos -->

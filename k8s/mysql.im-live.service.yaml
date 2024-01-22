@@ -9,7 +9,7 @@ metadata:
     version: v1
   annotations:
     eip.openelb.kubesphere.io/v1alpha2: layer2-eip
-    kubesphere.io/creator: dev-tom
+    kubesphere.io/creator: dev-zhang
     kubesphere.io/serviceType: statelessservice
     layer2.openelb.kubesphere.io/v1alpha1: localhost.localdomain.cluster.local
     lb.kubesphere.io/v1alpha1: openelb

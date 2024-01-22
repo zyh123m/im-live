@@ -8,13 +8,14 @@ metadata:
     version: v1
   annotations:
     deployment.kubernetes.io/revision: '13'
-    kubesphere.io/creator: dev-tom
+    kubesphere.io/creator: dev-zhang
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: mysql-slave
       version: v1
+
   template:
     metadata:
       creationTimestamp: null
@@ -22,7 +23,7 @@ spec:
         app: mysql-slave
         version: v1
       annotations:
-        kubesphere.io/creator: dev-tom
+        kubesphere.io/creator: dev-zhang
         kubesphere.io/imagepullsecrets: '{}'
         kubesphere.io/restartedAt: '2023-11-27T09:15:48.513Z'
         logging.kubesphere.io/logsidecar-config: '{}'

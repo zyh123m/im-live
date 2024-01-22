@@ -12,7 +12,7 @@
     <groupId>com.example</groupId>
     <artifactId>im-live-user</artifactId>
     <version>${revision}</version>
-    <name>im-live-user-provider</name>
+    <name>im-live-user</name>
 
     <description>im-live-user-provider</description>
 
@@ -101,7 +101,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.example.user.ImLiveUserApplication</mainClass>
-                    <skip>true</skip>
+
                 </configuration>
                 <executions>
                     <execution>

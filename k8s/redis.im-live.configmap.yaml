@@ -11,7 +11,7 @@ metadata:
     heritage: Helm
     release: redis
   annotations:
-    kubesphere.io/creator: dev-tom
+    kubesphere.io/creator: dev-zhang
     meta.helm.sh/release-name: redis
     meta.helm.sh/release-namespace: im-live
 data:

@@ -11,7 +11,7 @@
 
     <artifactId>im-live-im</artifactId>
     <version>${revision}</version>
-    <name>im-live-im-provider</name>
+    <name>im-live-im</name>
     <description>im-live-im-provider</description>
 
 
