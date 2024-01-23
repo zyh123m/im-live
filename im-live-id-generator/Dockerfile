@@ -12,4 +12,4 @@ EXPOSE 7777
 EXPOSE 17777
 ADD ./target/im-live-id-generator-1.0.jar ./
 
-CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar im-live-id-generator-1.0.jar
+CMD java -Djava.security.egd=file:/dev/./urandom -jar im-live-id-generator-1.0.jar

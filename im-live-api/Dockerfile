@@ -8,8 +8,8 @@ RUN mkdir -p /work
 
 WORKDIR /work
 
-EXPOSE 8080
-EXPOSE 18080
-ADD ./target/im-live-gateway-1.0.jar ./
+EXPOSE 8000
+EXPOSE 18000
+ADD ./target/im-live-api-1.0.jar ./
 
-CMD java -Djava.security.egd=file:/dev/./urandom -jar im-live-gateway-1.0.jar
+CMD java -Djava.security.egd=file:/dev/./urandom -jar im-live-api-1.0.jar

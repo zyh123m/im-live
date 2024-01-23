@@ -12,4 +12,4 @@ EXPOSE 8880
 EXPOSE 18880
 ADD ./target/im-live-user-1.0.jar ./
 
-CMD sleep 60;java -Djava.security.egd=file:/dev/./urandom -jar im-live-user-1.0.jar
+CMD java -Djava.security.egd=file:/dev/./urandom -jar im-live-user-1.0.jar
