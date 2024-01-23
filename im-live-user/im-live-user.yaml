@@ -6,8 +6,6 @@ metadata:
   labels:
     app: im-live-user
     version: latest
-  annotations:
-    kubesphere.io/creator: dev-zhang
 spec:
   replicas: 1
   selector:
@@ -21,7 +19,6 @@ spec:
         app: im-live-user
         version: latest
       annotations:
-        kubesphere.io/creator: dev-zhang
         kubesphere.io/imagepullsecrets: '{"container-qvfgfi":"harbor"}'
     spec:
       volumes:
