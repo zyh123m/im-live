@@ -18,7 +18,6 @@ spec:
         app: im-live-user
         version: latest
       annotations:
-        kubesphere.io/creator: dev-zhang
         kubesphere.io/imagepullsecrets: '{"container-im-live-user":"harbor"}'
     spec:
       volumes:
