@@ -6,8 +6,6 @@ metadata:
   labels:
     app: im-live-user
     version: latest
-  annotations:
-    kubesphere.io/creator: dev-zhang
 spec:
   replicas: 1
   selector:
@@ -16,14 +14,12 @@ spec:
       version: latest
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: im-live-user
         version: latest
       annotations:
         kubesphere.io/creator: dev-zhang
         kubesphere.io/imagepullsecrets: '{"container-im-live-user":"harbor"}'
-        kubesphere.io/restartedAt: '2024-01-23T05:26:55.795Z'
     spec:
       volumes:
         - name: host-time
