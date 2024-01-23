@@ -85,7 +85,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.example.auth.ImLiveGatewayApplication</mainClass>
+                    <mainClass>com.example.gateway.ImLiveGatewayApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

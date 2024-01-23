@@ -80,7 +80,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.example.auth.ImLiveIdGeneratorApplication</mainClass>
+                    <mainClass>com.example.generator.ImLiveIdGeneratorApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
