@@ -1,0 +1,130 @@
+pipeline {
+  agent {
+    node {
+      label 'jdk17'
+    }
+
+  }
+  stages {
+    stage('clone code') {
+      agent none
+      steps {
+        container('maven') {
+          git(url: 'https://gitee.com/TomZhangyh/im-live.git', credentialsId: 'gitee', branch: 'master', changelog: true, poll: false)
+        }
+
+      }
+    }
+
+    stage('maven package') {
+      agent none
+      steps {
+        container('maven') {
+          sh 'mvn clean package'
+        }
+
+      }
+    }
+
+    stage('dpkulu') {
+      parallel {
+        stage('id') {
+          agent none
+          steps {
+            container('maven') {
+              sh 'cd im-live-id-generator &&docker build -t="43.240.220.48:81/im-live/im-live-id-generator:latest" .'
+              sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+              sh 'docker push 43.240.220.48:81/im-live/im-live-id-generator:latest'
+            }
+
+          }
+        }
+
+        stage('user') {
+          agent none
+          steps {
+            container('maven') {
+              sh 'cd im-live-user &&ls&&docker info&&docker build -t="43.240.220.48:81/im-live/im-live-user:latest" .'
+              sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+              sh 'docker push 43.240.220.48:81/im-live/im-live-user:latest'
+            }
+
+          }
+        }
+
+        stage('auth') {
+          agent none
+          steps {
+            container('maven') {
+              sh 'cd im-live-auth &&docker build -t="43.240.220.48:81/im-live/im-live-auth:latest" .'
+              sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+              sh 'docker push 43.240.220.48:81/im-live/im-live-auth:latest'
+            }
+
+          }
+        }
+
+        stage('gateway') {
+          agent none
+          steps {
+            container('maven') {
+              sh 'cd im-live-gateway&&docker build -t="43.240.220.48:81/im-live/im-live-gateway:latest" .'
+              sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+              sh 'docker push 43.240.220.48:81/im-live/im-live-gateway:latest'
+            }
+
+          }
+        }
+
+        stage('api') {
+          agent none
+          steps {
+            container('maven') {
+              sh 'cd im-live-api&&docker build -t="43.240.220.48:81/im-live/im-live-api:latest" .'
+              sh 'echo "$DOCKER_PASSWORD" | docker login $REGISTRY -u "$DOCKER_USERNAME" --password-stdin'
+              sh 'docker push 43.240.220.48:81/im-live/im-live-api:latest'
+            }
+
+          }
+        }
+
+      }
+    }
+
+    stage('dpkulv') {
+      parallel {
+        
+        stage('deploy to dev') {
+        agent none
+        steps {
+          container('maven') {
+            withCredentials([kubeconfigContent(credentialsId: 'im-live-kubeconfig', variable: 'KUBECONFIG_CONFIG')]) {
+            sh 'ls&&mkdir -p ~/.kube/'
+            sh 'echo "$KUBECONFIG_CONFIG" > ~/.kube/config'
+            sh 'cd deploy/services'
+            sh 'ls'
+          }
+        }
+      }
+    }
+      }
+  
+    }
+    
+
+  }
+  environment {
+    DOCKER_USERNAME = 'admin'
+    DOCKER_PASSWORD = 'Harbor12345'
+    DOCKER_CREDENTIAL_ID = 'dockerhub-id'
+    GITHUB_CREDENTIAL_ID = 'github-id'
+    KUBECONFIG_CREDENTIAL_ID = 'im-live-kubeconfig'
+    REGISTRY = '43.240.220.48:81'
+    DOCKERHUB_NAMESPACE = 'im-live'
+    GITHUB_ACCOUNT = 'kubesphere'
+    APP_NAME = 'devops-java-sample'
+  }
+  parameters {
+    string(name: 'TAG_NAME', defaultValue: '', description: '')
+  }
+}

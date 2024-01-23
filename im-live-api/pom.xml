@@ -71,7 +71,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.example.api.ImLiveApiApplication</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>
