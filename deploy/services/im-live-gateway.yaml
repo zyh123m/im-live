@@ -1,0 +1,61 @@
+﻿kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: im-live-gateway-latest
+  namespace: im-live
+  labels:
+    app: im-live-gateway
+    version: latest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: im-live-gateway
+      version: latest
+  template:
+    metadata:
+      labels:
+        app: im-live-gateway
+        version: latest
+      annotations:
+        kubesphere.io/imagepullsecrets: '{"container-im-live-gateway":"harbor"}'
+    spec:
+      volumes:
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+            type: ''
+      containers:
+        - name: container-im-live-gateway
+          image: '43.240.220.48:81/im-live/im-live-gateway:latest'
+          ports:
+            - name: tcp-18080
+              containerPort: 18080
+              protocol: TCP
+            - name: tcp-8080
+              containerPort: 8080
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: host-time
+              readOnly: true
+              mountPath: /etc/localtime
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      imagePullSecrets:
+        - name: harbor
+      schedulerName: default-scheduler
+  serviceName: im-live-gateway
+  podManagementPolicy: OrderedReady
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  revisionHistoryLimit: 10
