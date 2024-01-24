@@ -7,7 +7,7 @@ package com.example.auth.constant;
  */
 public class SecurityConstants {
 
-    public static final String LOGIN_URL = "http://www.im.com/login";
+    public static final String LOGIN_URL = "http://auth.im.com/login";
     public static final String LOGIN_PATH = "/login";
     public static final String DEVICE_ACTIVATE_URI = "/activate";
 
