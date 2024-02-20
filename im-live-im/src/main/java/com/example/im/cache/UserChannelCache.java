@@ -33,28 +33,28 @@ public class UserChannelCache {
      * 此处使用set集合是为了满足用户多端设备信息同时推送的需求
      */
 
-    public static void put(String userId, Channel channel) {
+    public static void put(String username, Channel channel) {
 
-        ChannelGroup channelGroup = cacheMap.get(userId);
+        ChannelGroup channelGroup = cacheMap.get(username);
         if (channelGroup == null) {
             channelGroup = new DefaultChannelGroup(ImmediateEventExecutor.INSTANCE);
             channelGroup.add(channel);
-            cacheMap.put(userId,channelGroup);
+            cacheMap.put(username,channelGroup);
         }else{
             channelGroup.add(channel);
         }
 
     }
 
-    public static void remove(String userId,Channel channel){
+    public static void remove(String username,Channel channel){
         ChannelGroup channelGroup = null;
         try {
             lock.lock();
 
-            channelGroup = cacheMap.get(userId);
+            channelGroup = cacheMap.get(username);
             if (channelGroup != null) {
                 if (channelGroup.size()==1){
-                    cacheMap.remove(userId);
+                    cacheMap.remove(username);
                 }else{
                     channelGroup.remove(channel);
 
@@ -68,14 +68,14 @@ public class UserChannelCache {
 
     }
 
-    public static Set<Channel> getByUserId(String userId){
-        return cacheMap.get(userId);
+    public static Set<Channel> getByUserId(String username){
+        return cacheMap.get(username);
     }
 
 
-    public static void  writeAndFlush(String userId, Object object)  {
+    public static void  writeAndFlush(String username, Object object)  {
 
-        ChannelGroup channelGroup = cacheMap.get(userId);
+        ChannelGroup channelGroup = cacheMap.get(username);
         if (channelGroup != null) {
             channelGroup.writeAndFlush(object);
         }

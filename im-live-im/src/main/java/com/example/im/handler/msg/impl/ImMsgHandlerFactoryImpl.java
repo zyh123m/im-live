@@ -16,6 +16,8 @@ public class ImMsgHandlerFactoryImpl implements ImMsgHandlerFactory {
         handlerMap.put(ImMsgCodeEnum.IM_LOGIN_MSG.getCode(),new MsgLoginHandler());
         handlerMap.put(ImMsgCodeEnum.IM_LOGOUT_MSG.getCode(),new MsgLogoutHandler());
         handlerMap.put(ImMsgCodeEnum.IM_HEARTBEAT_MSG.getCode(),new MsgHeartBeatHandler());
+        handlerMap.put(ImMsgCodeEnum.IM_COMMON_MSG.getCode(),new MsgCommonHandler());
+
     }
 
     @Override

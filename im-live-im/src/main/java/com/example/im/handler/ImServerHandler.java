@@ -9,9 +9,12 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
+import io.netty.util.AttributeKey;
 
 import java.io.FileOutputStream;
 
@@ -25,8 +28,6 @@ public class ImServerHandler  extends SimpleChannelInboundHandler{
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object frame) throws Exception {
-
-
         if(frame instanceof TextWebSocketFrame){
             textWebSocketFrame(ctx, (TextWebSocketFrame) frame);
         }else if(frame instanceof WebSocketFrame){ //websocket帧类型 已连接
@@ -73,24 +74,16 @@ public class ImServerHandler  extends SimpleChannelInboundHandler{
     }
 
 
-    /**
-     * 当客户端连接服务端之后（打开连接）
-     * 获取客户端的channel，并且放到ChannelGroup中去进行管理。
-     */
-    @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-        int id = UserChannelCache.atomicInteger.incrementAndGet() % 2;
 
-        UserChannelCache.put( "username"+id,ctx.channel());
-    }
 
     /**
      * 当客户端断开服务端之后（断开连接，如关闭浏览器窗口）
      */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-
-        UserChannelCache.remove("username1",ctx.channel());
+        AttributeKey<Object> key = AttributeKey.valueOf("username");
+        String username = (String) ctx.attr(key).get();
+        UserChannelCache.remove(username,ctx.channel());
         System.out.println("客户端断开，channel对应的长id为：" + ctx.channel().id().asLongText());
     }
 
