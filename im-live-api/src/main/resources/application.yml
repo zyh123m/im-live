@@ -47,6 +47,6 @@ dubbo:
 
 minio:
   bucketName: im-live
-  endpoint: http://minio.kubesphere-system:9000/
-  accessKey: openpitrixminioaccesskey
-  secretKey: openpitrixminiosecretkey
+  endpoint: http://192.168.101.121:9000/
+  accessKey: minio
+  secretKey: minio@123

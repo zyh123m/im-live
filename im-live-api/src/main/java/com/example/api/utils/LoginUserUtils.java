@@ -19,4 +19,11 @@ public class LoginUserUtils {
         UserDTO user = userRpcService.getUserByUsername(jwt.getClaimAsString("sub"));
         return user;
     }
+
+    public static String username(){
+        JwtAuthenticationToken authentication =
+                (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+        return jwt.getClaimAsString("sub");
+    }
 }

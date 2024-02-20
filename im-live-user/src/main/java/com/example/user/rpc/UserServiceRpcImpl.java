@@ -12,6 +12,8 @@ import org.example.user.dto.UserDTO;
 import org.example.user.service.UserRpcService;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.List;
+
 @DubboService
 public class UserServiceRpcImpl implements UserRpcService {
 
@@ -32,5 +34,10 @@ public class UserServiceRpcImpl implements UserRpcService {
     @Override
     public Boolean updateUserAvatar(String username, String avatarUrl) {
         return userService.update(new LambdaUpdateWrapper<User>().set(User::getAvatar,avatarUrl).eq(User::getUsername, username));
+    }
+
+    @Override
+    public List<UserDTO> friendList(String username, String nickname) {
+        return userService.friendList(username,nickname);
     }
 }

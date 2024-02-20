@@ -22,7 +22,6 @@
              socket: null,
              init: function() {
                 if (window.WebSocket) {
-                   var token='dcvuahsdnfajw12kjfasfsdf34';
                    CHAT.socket = new WebSocket("ws://localhost:9090/ws?token=123");
                    CHAT.socket.onopen = function() {
                       console.log("连接建立成功...");

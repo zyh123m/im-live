@@ -2,6 +2,8 @@ package org.example.user.service;
 
 import org.example.user.dto.UserDTO;
 
+import java.util.List;
+
 public interface UserRpcService {
 
     UserDTO getUserByUsername(String username);
@@ -13,6 +15,8 @@ public interface UserRpcService {
      * @return
      */
     Boolean updateUserAvatar(String username,String avatarUrl);
+
+    List<UserDTO> friendList(String username,String nickname);
 
 
 }
