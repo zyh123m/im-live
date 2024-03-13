@@ -16,7 +16,7 @@
 
 SET NAMES utf8mb3;
 SET FOREIGN_KEY_CHECKS = 0;
-
+use nacos;
 -- ----------------------------
 -- Table structure for config_info
 -- ----------------------------

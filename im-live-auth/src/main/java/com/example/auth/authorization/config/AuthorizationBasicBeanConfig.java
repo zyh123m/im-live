@@ -56,8 +56,8 @@ public class AuthorizationBasicBeanConfig {
 
     //token 有效期设置
     public static final TokenSettings tokenSettings = TokenSettings.builder()
-            .accessTokenTimeToLive(Duration.ofMinutes(20))
-            .refreshTokenTimeToLive(Duration.ofMinutes(60))
+            .accessTokenTimeToLive(Duration.ofHours(20))
+            .refreshTokenTimeToLive(Duration.ofHours(24))
             .build();
 
 

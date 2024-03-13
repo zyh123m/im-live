@@ -16,7 +16,7 @@
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
+use common;
 -- ----------------------------
 -- Table structure for t_id_generate_config
 -- ----------------------------
