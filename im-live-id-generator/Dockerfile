@@ -1,4 +1,4 @@
-FROM 43.240.220.48:81/kubesphere/builder-maven:v3.2.1-jdk17
+FROM  openjdk:17-jdk-alpine
 
 MAINTAINER dev-zhang
 

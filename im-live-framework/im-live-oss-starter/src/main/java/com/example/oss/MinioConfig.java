@@ -1,4 +1,4 @@
-package com.example.common;
+package com.example.oss;
 
 import io.minio.MinioClient;
 import lombok.Data;

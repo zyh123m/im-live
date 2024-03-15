@@ -3,7 +3,7 @@ package com.example.api.service;
 import com.example.api.utils.LoginUserUtils;
 import jakarta.annotation.Resource;
 import org.apache.dubbo.config.annotation.DubboReference;
-import com.example.common.response.Result;
+import com.example.oss.response.Result;
 import org.example.user.dto.UserDTO;
 import org.example.user.service.UserRpcService;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.common.utils;
+package com.example.oss.utils;
 
 public class PhoneNumberUtils {
 

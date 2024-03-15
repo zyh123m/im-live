@@ -1,7 +1,7 @@
 package com.example.api.controller;
 
 import com.example.api.service.ChatService;
-import com.example.common.response.Result;
+import com.example.oss.response.Result;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

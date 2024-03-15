@@ -1,4 +1,4 @@
-package com.example.common.constant;
+package com.example.oss.constant;
 
 
 /**

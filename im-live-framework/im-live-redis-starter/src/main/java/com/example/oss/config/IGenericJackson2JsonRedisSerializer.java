@@ -1,4 +1,4 @@
-package com.example.common.config;
+package com.example.oss.config;
 
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;

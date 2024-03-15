@@ -1,7 +1,6 @@
-package com.example.common;
+package com.example.oss;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import jakarta.annotation.Resource;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.example.generator.service.IdGeneratorRpc;
 import org.springframework.stereotype.Component;

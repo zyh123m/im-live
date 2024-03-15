@@ -1,7 +1,7 @@
 package com.example.api.service;
 
 import com.example.api.utils.LoginUserUtils;
-import com.example.common.response.Result;
+import com.example.oss.response.Result;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.example.user.dto.UserDTO;
 import org.example.user.service.UserRpcService;

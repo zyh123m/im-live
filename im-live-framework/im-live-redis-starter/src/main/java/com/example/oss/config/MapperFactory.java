@@ -1,4 +1,4 @@
-package com.example.common.config;
+package com.example.oss.config;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.core.JsonGenerator;

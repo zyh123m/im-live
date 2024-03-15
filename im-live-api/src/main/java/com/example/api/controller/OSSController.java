@@ -4,9 +4,9 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.compress.utils.IOUtils;
-import com.example.common.MinioConfig;
-import com.example.common.MinioUtils;
-import com.example.common.response.Result;
+import com.example.oss.MinioConfig;
+import com.example.oss.MinioUtils;
+import com.example.oss.response.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

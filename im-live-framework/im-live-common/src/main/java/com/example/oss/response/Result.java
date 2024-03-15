@@ -1,7 +1,7 @@
-package com.example.common.response;
+package com.example.oss.response;
 
 import lombok.Data;
-import com.example.common.constant.CommonConstant;
+import com.example.oss.constant.CommonConstant;
 
 import java.io.Serializable;
 

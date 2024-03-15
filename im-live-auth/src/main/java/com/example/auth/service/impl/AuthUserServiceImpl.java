@@ -2,7 +2,7 @@ package com.example.auth.service.impl;
 
 import com.example.auth.service.AuthUserService;
 import org.apache.dubbo.config.annotation.DubboReference;
-import com.example.common.response.Result;
+import com.example.oss.response.Result;
 import org.example.user.dto.UserDTO;
 import org.example.user.service.UserRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
