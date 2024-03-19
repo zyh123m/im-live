@@ -485,7 +485,7 @@ CREATE TABLE `user_watch_history`  (
 -- ----------------------------
 -- Procedure structure for shard_user_table
 -- ----------------------------
-DROP PROCEDURE IF EXISTS `shard_user_table`;
+DROP PROCEDURE IF EXISTS alter_user_table;
 delimiter ;;
 CREATE PROCEDURE `shard_user_table`()
 BEGIN

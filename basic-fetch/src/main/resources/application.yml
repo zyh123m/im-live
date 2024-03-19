@@ -1,0 +1,56 @@
+server:
+  port: 8087
+  servlet:
+    context-path: /fetch-api
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://@mysql.host@:3306/auth?serverTimezone=Asia/Shanghai&userUnicode=true&characterEncoding=utf-8&ssl-mode=REQUIRED
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+  main:
+    banner-mode: off
+  application:
+    name: im-live-fetch
+  profiles:
+    # 环境配置
+    active: @profiles.active@
+
+--- # nacos 配置
+spring:
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    nacos:
+      # nacos 服务地址
+      server-addr: @nacos.server@
+      discovery:
+        # 注册组
+        group: @nacos.discovery.group@
+        namespace: @namespace@
+      config:
+        # 配置组
+        group: @nacos.config.group@
+        namespace: @namespace@
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: nacos://@nacos.server@?namespace=dev
+  protocol:
+    name: tri
+    port: 18087
+
+minio:
+  bucketName: music
+  endpoint: http://192.168.101.121:9000/
+  accessKey: minio
+  secretKey: minio@123
