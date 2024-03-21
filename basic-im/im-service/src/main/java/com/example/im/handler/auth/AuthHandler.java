@@ -18,10 +18,10 @@ public class AuthHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        log.info("AuthHandler.................");
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest request = (FullHttpRequest) msg;
             HttpHeaders headers = request.headers();
-
             String uri = request.getUri();
             int i = uri.lastIndexOf("/")+1;
             String username = uri.substring(i,uri.length());

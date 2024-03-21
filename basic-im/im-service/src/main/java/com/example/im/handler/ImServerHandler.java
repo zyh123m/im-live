@@ -15,9 +15,10 @@ import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.util.AttributeKey;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileOutputStream;
-
+@Slf4j
 public class ImServerHandler  extends SimpleChannelInboundHandler{
 
 
@@ -28,6 +29,8 @@ public class ImServerHandler  extends SimpleChannelInboundHandler{
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object frame) throws Exception {
+        log.info("ImServerHandler.................");
+
         if(frame instanceof TextWebSocketFrame){
             textWebSocketFrame(ctx, (TextWebSocketFrame) frame);
         }else if(frame instanceof WebSocketFrame){ //websocket帧类型 已连接
