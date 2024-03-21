@@ -63,8 +63,6 @@ public class NettyConfig implements InitializingBean {
 
                         channel.pipeline().addLast(new AuthHandler());
                         // =========== 以上是用于支持http协议 =========== //
-
-
                         /*
                          * websocket服务器处理的协议，用于指定给客户端连接访问的路由：/ws
                          * 本handler会帮你处理一些繁重的复杂的事
