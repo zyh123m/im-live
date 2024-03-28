@@ -85,10 +85,6 @@
             <artifactId>shardingsphere-jdbc-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>basic-mq-starter</artifactId>
-        </dependency>
 
     </dependencies>
     <build>

@@ -29,8 +29,6 @@ public class ImServerHandler  extends SimpleChannelInboundHandler{
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object frame) throws Exception {
-        log.info("ImServerHandler.................");
-
         if(frame instanceof TextWebSocketFrame){
             textWebSocketFrame(ctx, (TextWebSocketFrame) frame);
         }else if(frame instanceof WebSocketFrame){ //websocket帧类型 已连接

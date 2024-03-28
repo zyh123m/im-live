@@ -15,7 +15,6 @@
         <module>basic-redis-starter</module>
         <module>basic-oss-starter</module>
         <module>basic-nacos-starter</module>
-        <module>basic-mq-starter</module>
         <module>basic-common</module>
         <module>basic-mybatis-starter</module>
     </modules>

@@ -1,7 +1,6 @@
 package com.example.im.config;
 
-import com.example.im.common.ImMsgDecoder;
-import com.example.im.common.ImMsgEncoder;
+
 import com.example.im.handler.ImServerHandler;
 import com.example.im.handler.auth.AuthHandler;
 import com.example.im.initializer.WebSocketInitializer;

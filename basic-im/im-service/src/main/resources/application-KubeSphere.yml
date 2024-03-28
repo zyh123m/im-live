@@ -13,5 +13,38 @@ spring:
           max-wait: -1    # 最大阻塞等待时间，负值表示没限制，默认-1
           max-idle: 8     # 最大空闲连接，默认8
           min-idle: 0     # 最小空闲连接，默认0
+  security:
+    oauth2:
+      # 资源服务器配置
+      resourceserver:
+        jwt:
+          # Jwt中claims的iss属性，也就是jwt的签发地址，即认证服务器的根路径
+          # 资源服务器会进一步的配置，通过该地址获取公钥以解析jwt
+          issuer-uri: http://www.im.com:8080/auth-api
+
+
+rocketmq:
+  consumer:
+    group: msg_consumer_group
+    # 一次拉取消息最大值，注意是拉取消息的最大值而非消费最大值
+    pull-batch-size: 10
+  name-server: @rocketmq.host@:9876
+  producer:
+    # 发送同一类消息的设置为同一个group，保证唯一
+    group: msg_producer_group
+    # 发送消息超时时间，默认3000
+    sendMessageTimeout: 10000
+    # 发送消息失败重试次数，默认2
+    retryTimesWhenSendFailed: 2
+    # 异步消息重试此处，默认2
+    retryTimesWhenSendAsyncFailed: 2
+    # 消息最大长度，默认1024 * 1024 * 4(默认4M)
+    maxMessageSize: 4096
+    # 压缩消息阈值，默认4k(1024 * 4)
+    compressMessageBodyThreshold: 4096
+    # 是否在内部发送失败时重试另一个broker，默认false
+    retryNextServer: false
+
 netty:
   port: 9090
+

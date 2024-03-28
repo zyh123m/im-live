@@ -9,8 +9,7 @@ import lombok.RequiredArgsConstructor;
 import java.io.Serializable;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class ImMsg implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,6 +21,7 @@ public class ImMsg implements Serializable {
     private int length;
     //消息体
     private Object body;
+
 
 
 }

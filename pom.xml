@@ -18,7 +18,6 @@
         <module>basic-im</module>
         <module>basic-msg</module>
         <module>basic-pay</module>
-        <module>basic-fetch</module>
         <module>basic-im-router</module>
     </modules>
 
@@ -38,7 +37,7 @@
         <lombok.version>1.18.26</lombok.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <druid.version>1.1.22</druid.version>
-        <oauth2-authorization-server.version>1.2.1</oauth2-authorization-server.version>
+        <oauth2-authorization-server.version>1.2.3</oauth2-authorization-server.version>
         <sms4j.version>3.0.3</sms4j.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <protobuf-java.version>3.19.6</protobuf-java.version>
@@ -149,11 +148,6 @@
                 <version>${revision}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.example</groupId>
-                <artifactId>basic-mq-starter</artifactId>
-                <version>${revision}</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.example</groupId>
@@ -299,6 +293,7 @@
                 <nacos.config.group>DEFAULT_GROUP</nacos.config.group>
                 <mysql.host>192.168.101.121</mysql.host>
                 <redis.host>192.168.101.121</redis.host>
+                <rocketmq.host>192.168.101.121</rocketmq.host>
             </properties>
             <activation>
                 <!-- 默认环境 -->
