@@ -15,10 +15,6 @@
         <module>basic-framework</module>
         <module>basic-api</module>
         <module>basic-gateway</module>
-        <module>basic-im</module>
-        <module>basic-msg</module>
-        <module>basic-pay</module>
-        <module>basic-im-router</module>
     </modules>
 
     <properties>
@@ -107,17 +103,7 @@
                 <version>4.0.4</version>
 
             </dependency>
-            <dependency>
-                <groupId>com.example</groupId>
-                <artifactId>pay-rpc</artifactId>
-                <version>${revision}</version>
-            </dependency>
 
-            <dependency>
-                <groupId>com.example</groupId>
-                <artifactId>im-rpc</artifactId>
-                <version>${revision}</version>
-            </dependency>
             <dependency>
                 <groupId>com.example</groupId>
                 <artifactId>id-generator-rpc</artifactId>
@@ -127,12 +113,6 @@
             <dependency>
                 <groupId>com.example</groupId>
                 <artifactId>user-rpc</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.example</groupId>
-                <artifactId>msg-rpc</artifactId>
                 <version>${revision}</version>
             </dependency>
 
