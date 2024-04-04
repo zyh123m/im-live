@@ -2,7 +2,9 @@ package com.example.auth.authorization.password;
 
 
 
+import cn.hutool.core.util.StrUtil;
 import com.example.auth.constant.SecurityConstants;
+import com.example.auth.util.OAuth2EndpointUtils;
 import com.example.auth.util.SecurityUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
@@ -17,68 +19,82 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames.ERROR_URI;
 
 /**
- * 短信验证码登录Token转换器
+ * 密码模式参数解析器
+ * <p>
+ * 解析请求参数中的用户名和密码，并构建相应的身份验证(Authentication)对象
  *
- * @author vains
+ * @author haoxr
+ * @see org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter
+ * @since 3.0.0
  */
 public class PasswordAuthenticationConverter implements AuthenticationConverter {
 
-
     @Override
     public Authentication convert(HttpServletRequest request) {
-        // grant_type (REQUIRED)
+
+        // 授权类型 (必需)
         String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
-        if (!SecurityConstants.GRANT_TYPE_PASSWORD.equals(grantType)) {
+        if (!AuthorizationGrantType.PASSWORD.getValue().equals(grantType)) {
             return null;
         }
 
-        // 这里目前是客户端认证信息
+        // 客户端信息
         Authentication clientPrincipal = SecurityContextHolder.getContext().getAuthentication();
 
-        // 获取请求中的参数
-        MultiValueMap<String, String> parameters = SecurityUtils.getParameters(request);
+        // 参数提取验证
+        MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
 
-        // scope (OPTIONAL)
+        // 令牌申请访问范围验证 (可选)
         String scope = parameters.getFirst(OAuth2ParameterNames.SCOPE);
         if (StringUtils.hasText(scope) &&
                 parameters.get(OAuth2ParameterNames.SCOPE).size() != 1) {
-                SecurityUtils.throwError(OAuth2ErrorCodes.SERVER_ERROR,"scope 参数不合法", ERROR_URI);
+            OAuth2EndpointUtils.throwError(
+                    OAuth2ErrorCodes.INVALID_REQUEST,
+                    OAuth2ParameterNames.SCOPE,
+                    OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
         }
         Set<String> requestedScopes = null;
         if (StringUtils.hasText(scope)) {
-            requestedScopes = new HashSet<>(
-                    Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
+            requestedScopes = new HashSet<>(Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
         }
 
-        // Mobile phone number (REQUIRED)
+        // 用户名验证(必需)
         String username = parameters.getFirst(OAuth2ParameterNames.USERNAME);
-        if (!StringUtils.hasText(username) || parameters.get(OAuth2ParameterNames.USERNAME).size() != 1) {
-            SecurityUtils.throwError(OAuth2ErrorCodes.SERVER_ERROR,"username 参数不合法", ERROR_URI);
+        if (StrUtil.isBlank(username)) {
+            OAuth2EndpointUtils.throwError(
+                    OAuth2ErrorCodes.INVALID_REQUEST,
+                    OAuth2ParameterNames.USERNAME,
+                    OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI
+            );
         }
 
-        // SMS verification code (REQUIRED)
+        // 密码验证(必需)
         String password = parameters.getFirst(OAuth2ParameterNames.PASSWORD);
-        if (!StringUtils.hasText(password) || parameters.get(OAuth2ParameterNames.PASSWORD).size() != 1) {
-            SecurityUtils.throwError(OAuth2ErrorCodes.SERVER_ERROR,"password 参数不合法", ERROR_URI);
-
+        if (StrUtil.isBlank(password)) {
+            OAuth2EndpointUtils.throwError(
+                    OAuth2ErrorCodes.INVALID_REQUEST,
+                    OAuth2ParameterNames.PASSWORD,
+                    OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI
+            );
         }
 
-        // 提取附加参数
-        Map<String, Object> additionalParameters = new HashMap<>();
-        parameters.forEach((key, value) -> {
-            if (!key.equals(OAuth2ParameterNames.GRANT_TYPE) &&
-                    !key.equals(OAuth2ParameterNames.CLIENT_ID)) {
-                additionalParameters.put(key, value.get(0));
-            }
-        });
+        // 附加参数(保存用户名/密码传递给 PasswordAuthenticationProvider 用于身份认证)
+        Map<String, Object> additionalParameters = parameters
+                .entrySet()
+                .stream()
+                .filter(e -> !e.getKey().equals(OAuth2ParameterNames.GRANT_TYPE) &&
+                        !e.getKey().equals(OAuth2ParameterNames.SCOPE)
+                ).collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get(0)));
 
-        // 构建AbstractAuthenticationToken子类实例并返回
-        return new PasswordAuthenticationToken(new AuthorizationGrantType(SecurityConstants.GRANT_TYPE_PASSWORD), clientPrincipal, requestedScopes, additionalParameters);
+        return new PasswordAuthenticationToken(
+                clientPrincipal,
+                requestedScopes,
+                additionalParameters
+        );
     }
-
 
 }

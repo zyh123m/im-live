@@ -70,13 +70,11 @@ public class AuthorizationSecurityConfig {
                                 )))
                         .authenticationProviders(providers ->
                                 providers.addAll(List.of(
-                                        new PasswordAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService)
+                                        new PasswordAuthenticationProvider( authenticationManager, authorizationService,tokenGenerator)
                                 )))
                         .accessTokenResponseHandler(new ImLiveAuthorizationSuccessHandler()) // 自定义成功响应
                         .errorResponseHandler(new ImLiveAuthorizationFailureHandler())
-                )
-
-        ;
+                );
 
         basicConfig(http);
 
@@ -120,7 +118,6 @@ public class AuthorizationSecurityConfig {
                             .deleteCookies(JSESSIONID);
                 });
 
-
         basicConfig(http);
 
         return http.build();
@@ -139,6 +136,7 @@ public class AuthorizationSecurityConfig {
                         .authenticationEntryPoint(new ImLiveExceptionEntryPoint())
                         .jwt(Customizer.withDefaults())
                 );
+
     }
 
 }

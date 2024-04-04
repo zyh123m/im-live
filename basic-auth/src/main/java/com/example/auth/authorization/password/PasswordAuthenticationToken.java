@@ -2,89 +2,58 @@ package com.example.auth.authorization.password;
 
 
 import org.springframework.lang.Nullable;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationGrantAuthenticationToken;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * 自定义短信验证登录Token类
+ * 密码授权模式身份验证令牌(包含用户名和密码等)
  *
- * @author vains
+ * @author haoxr
+ * @since 3.0.0
  */
-public class PasswordAuthenticationToken extends AbstractAuthenticationToken {
+public class PasswordAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {
 
+    public static final AuthorizationGrantType PASSWORD = new AuthorizationGrantType("password");
 
 
     /**
-     * 本次登录申请的scope
+     * 令牌申请访问范围
      */
     private final Set<String> scopes;
 
     /**
-     * 客户端认证信息
+     * 密码模式身份验证令牌
+     *
+     * @param clientPrincipal      客户端信息
+     * @param scopes               令牌申请访问范围
+     * @param additionalParameters 自定义额外参数(用户名和密码)
      */
-    private final Authentication clientPrincipal;
+    public PasswordAuthenticationToken(
+            Authentication clientPrincipal,
+            Set<String> scopes,
+            @Nullable Map<String, Object> additionalParameters
+    ) {
+        super(PASSWORD, clientPrincipal, additionalParameters);
+        this.scopes = Collections.unmodifiableSet(scopes != null ? new HashSet<>(scopes) : Collections.emptySet());
 
-    /**
-     * 当前请求的参数
-     */
-    private final Map<String, Object> additionalParameters;
-
-    /**
-     * 认证方式
-     */
-    private final AuthorizationGrantType authorizationGrantType;
-
-    public PasswordAuthenticationToken(AuthorizationGrantType authorizationGrantType,
-                                       Authentication clientPrincipal,
-                                       @Nullable Set<String> scopes,
-                                       @Nullable Map<String, Object> additionalParameters) {
-        super(Collections.emptyList());
-        this.scopes = scopes;
-        this.clientPrincipal = clientPrincipal;
-        this.additionalParameters = additionalParameters;
-        this.authorizationGrantType = authorizationGrantType;
     }
 
+    /**
+     * 用户凭证(密码)
+     */
     @Override
     public Object getCredentials() {
-        return null;
+        return this.getAdditionalParameters().get(OAuth2ParameterNames.PASSWORD);
     }
 
-    @Override
-    public Object getPrincipal() {
-        return clientPrincipal;
-    }
-
-    /**
-     * 返回请求的scope(s)
-     *
-     * @return 请求的scope(s)
-     */
     public Set<String> getScopes() {
-        return this.scopes;
+        return scopes;
     }
-
-    /**
-     * 返回请求中的authorization grant type
-     *
-     * @return authorization grant type
-     */
-    public AuthorizationGrantType getAuthorizationGrantType() {
-        return this.authorizationGrantType;
-    }
-
-    /**
-     * 返回请求中的附加参数
-     *
-     * @return 附加参数
-     */
-    public Map<String, Object> getAdditionalParameters() {
-        return this.additionalParameters;
-    }
-
 }
