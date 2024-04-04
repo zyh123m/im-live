@@ -1,18 +1,14 @@
-server:
-  servlet:
-    session:
-      cookie:
-        domain: im.com
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql.im-live:3306/auth?serverTimezone=Asia/Shanghai&userUnicode=true&characterEncoding=utf-8&ssl-mode=REQUIRED
+    url: jdbc:mysql://@mysql.host@:3306/auth?serverTimezone=Asia/Shanghai&userUnicode=true&characterEncoding=utf-8&ssl-mode=REQUIRED
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
   data:
     redis:
-      host: redis-dns.im-live
+      host: @redis.host@
       port: 6379
       database: 0
       #    password: 123456 #默认为空
