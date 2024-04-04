@@ -67,7 +67,7 @@ public class PasswordAuthenticationProvider implements AuthenticationProvider {
                 SecurityUtils.getAuthenticatedClientElseThrowInvalidClient(authenticationToken);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
         // Ensure the client is configured to use this authorization grant type
-        if (registeredClient == null || !registeredClient.getAuthorizationGrantTypes().contains(authenticationToken.getAuthorizationGrantType())) {
+        if (registeredClient == null || !registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.PASSWORD)) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
         }
 
@@ -83,7 +83,7 @@ public class PasswordAuthenticationProvider implements AuthenticationProvider {
                 .principal(authenticate)
                 .authorizationServerContext(AuthorizationServerContextHolder.getContext())
                 .authorizedScopes(authorizedScopes)
-                .authorizationGrantType(authenticationToken.getAuthorizationGrantType())
+                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
                 .authorizationGrant(authenticationToken);
 
         // Initialize the OAuth2Authorization
@@ -95,7 +95,7 @@ public class PasswordAuthenticationProvider implements AuthenticationProvider {
                 .principalName(authenticate.getName())
                 // 设置当前用户认证信息
                 .attribute(Principal.class.getName(), authenticate)
-                .authorizationGrantType(authenticationToken.getAuthorizationGrantType());
+                .authorizationGrantType(AuthorizationGrantType.PASSWORD);
 
         // ----- Access token -----
         OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();

@@ -77,7 +77,7 @@ public class PasswordAuthenticationConverter implements AuthenticationConverter 
         });
 
         // 构建AbstractAuthenticationToken子类实例并返回
-        return new PasswordAuthenticationToken(new AuthorizationGrantType(SecurityConstants.GRANT_TYPE_PASSWORD), clientPrincipal, requestedScopes, additionalParameters);
+        return new PasswordAuthenticationToken( clientPrincipal, requestedScopes, additionalParameters);
     }
 
 
