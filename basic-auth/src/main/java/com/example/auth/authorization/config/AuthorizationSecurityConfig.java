@@ -51,6 +51,7 @@ public class AuthorizationSecurityConfig {
 
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 
+        basicConfig(http);
         //配置Oidc
         authorizationServerConfigurer
                 .oidc(Customizer.withDefaults())
@@ -70,13 +71,14 @@ public class AuthorizationSecurityConfig {
                                 )))
                         .authenticationProviders(providers ->
                                 providers.addAll(List.of(
-                                        new PasswordAuthenticationProvider( authenticationManager, authorizationService,tokenGenerator)
+                                        new PasswordAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService)
                                 )))
                         .accessTokenResponseHandler(new ImLiveAuthorizationSuccessHandler()) // 自定义成功响应
                         .errorResponseHandler(new ImLiveAuthorizationFailureHandler())
+
                 );
 
-        basicConfig(http);
+
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
         http.securityMatcher(endpointsMatcher)
@@ -132,9 +134,10 @@ public class AuthorizationSecurityConfig {
                         .authenticationEntryPoint(new ImLiveExceptionEntryPoint())
                 )
                 .oauth2ResourceServer((resourceServer) -> resourceServer
+                        .jwt(Customizer.withDefaults())
                         .accessDeniedHandler(SecurityUtils::exceptionHandler)
                         .authenticationEntryPoint(new ImLiveExceptionEntryPoint())
-                        .jwt(Customizer.withDefaults())
+
                 );
 
     }

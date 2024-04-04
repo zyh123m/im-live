@@ -77,13 +77,12 @@ public class AuthorizationBasicBeanConfig {
 
 
 
-    /**
-     * 基于redis实现的授权确认管理服务
-     */
     @Bean
-    public OAuth2AuthorizationConsentService auth2AuthorizationConsentService(){
-            return new ImLiveOAuth2AuthorizationConsentService();
+    public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
+        // 基于db的授权确认管理服务，还有一个基于内存的服务实现InMemoryOAuth2AuthorizationConsentService
+        return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
     }
+
 
     /**
      * 自定义jwt，将权限信息放至jwt中
