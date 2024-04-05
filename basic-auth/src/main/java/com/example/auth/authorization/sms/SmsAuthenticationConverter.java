@@ -1,15 +1,13 @@
-package com.example.auth.authorization.password;
+package com.example.auth.authorization.sms;
 
 
 
+import com.example.auth.authorization.password.PasswordAuthenticationToken;
 import com.example.auth.constant.SecurityConstants;
 import com.example.auth.util.SecurityUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.web.authentication.AuthenticationConverter;
@@ -25,14 +23,14 @@ import static org.springframework.security.oauth2.core.endpoint.OAuth2ParameterN
  *
  * @author vains
  */
-public class PasswordAuthenticationConverter implements AuthenticationConverter {
+public class SmsAuthenticationConverter implements AuthenticationConverter {
 
 
     @Override
     public Authentication convert(HttpServletRequest request) {
         // grant_type (REQUIRED)
         String grantType = request.getParameter(OAuth2ParameterNames.GRANT_TYPE);
-        if (!SecurityConstants.GRANT_TYPE_PASSWORD.equals(grantType)) {
+        if (!SecurityConstants.GRANT_TYPE_SMS_CODE.equals(grantType)) {
             return null;
         }
 
@@ -55,15 +53,15 @@ public class PasswordAuthenticationConverter implements AuthenticationConverter 
         }
 
         // Mobile phone number (REQUIRED)
-        String username = parameters.getFirst(OAuth2ParameterNames.USERNAME);
-        if (!StringUtils.hasText(username) || parameters.get(OAuth2ParameterNames.USERNAME).size() != 1) {
-            SecurityUtils.throwError(OAuth2ErrorCodes.SERVER_ERROR,"username 参数不合法", ERROR_URI);
+        String username = parameters.getFirst("phone");
+        if (!StringUtils.hasText(username) || parameters.get("phone").size() != 1) {
+            SecurityUtils.throwError(OAuth2ErrorCodes.SERVER_ERROR,"phone 参数不合法", ERROR_URI);
         }
 
         // SMS verification code (REQUIRED)
-        String password = parameters.getFirst(OAuth2ParameterNames.PASSWORD);
-        if (!StringUtils.hasText(password) || parameters.get(OAuth2ParameterNames.PASSWORD).size() != 1) {
-            SecurityUtils.throwError(OAuth2ErrorCodes.SERVER_ERROR,"password 参数不合法", ERROR_URI);
+        String password = parameters.getFirst("captcha");
+        if (!StringUtils.hasText(password) || parameters.get("captcha").size() != 1) {
+            SecurityUtils.throwError(OAuth2ErrorCodes.SERVER_ERROR,"captcha 参数不合法", ERROR_URI);
 
         }
 
@@ -77,7 +75,7 @@ public class PasswordAuthenticationConverter implements AuthenticationConverter 
         });
 
         // 构建AbstractAuthenticationToken子类实例并返回
-        return new PasswordAuthenticationToken( clientPrincipal,additionalParameters,requestedScopes);
+        return new SmsAuthenticationToken(clientPrincipal,additionalParameters,requestedScopes);
     }
 
 

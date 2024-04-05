@@ -1,6 +1,8 @@
 package com.example.auth.authorization.config;
 
 
+import com.example.auth.authorization.sms.SmsAuthenticationConverter;
+import com.example.auth.authorization.sms.SmsAuthenticationProvider;
 import com.example.auth.constant.SecurityConstants;
 import com.example.auth.authorization.password.PasswordAuthenticationConverter;
 import com.example.auth.authorization.password.PasswordAuthenticationProvider;
@@ -67,11 +69,13 @@ public class AuthorizationSecurityConfig {
                 .tokenEndpoint(tokenEndpoint -> tokenEndpoint
                         .accessTokenRequestConverters(converters ->
                                 converters.addAll(List.of(
-                                        new PasswordAuthenticationConverter()
+                                        new PasswordAuthenticationConverter(),
+                                        new SmsAuthenticationConverter()
                                 )))
                         .authenticationProviders(providers ->
                                 providers.addAll(List.of(
-                                        new PasswordAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService)
+                                        new PasswordAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService),
+                                        new SmsAuthenticationProvider(tokenGenerator, authenticationManager, authorizationService)
                                 )))
                         .accessTokenResponseHandler(new ImLiveAuthorizationSuccessHandler()) // 自定义成功响应
                         .errorResponseHandler(new ImLiveAuthorizationFailureHandler())

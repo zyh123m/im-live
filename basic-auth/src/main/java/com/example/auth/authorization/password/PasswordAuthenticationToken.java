@@ -35,11 +35,7 @@ public class PasswordAuthenticationToken extends OAuth2AuthorizationGrantAuthent
      * @param scopes               令牌申请访问范围
      * @param additionalParameters 自定义额外参数(用户名和密码)
      */
-    public PasswordAuthenticationToken(
-            Authentication clientPrincipal,
-            Set<String> scopes,
-            @Nullable Map<String, Object> additionalParameters
-    ) {
+    public PasswordAuthenticationToken(Authentication clientPrincipal, @Nullable Map<String, Object> additionalParameters,Set<String> scopes) {
         super(PASSWORD, clientPrincipal, additionalParameters);
         this.scopes = Collections.unmodifiableSet(scopes != null ? new HashSet<>(scopes) : Collections.emptySet());
 
